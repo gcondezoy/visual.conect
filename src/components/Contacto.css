@@ -115,11 +115,7 @@
   position: sticky;
   top: calc(var(--nav-h) + 1.5rem);
   padding: 2rem;
-  background: linear-gradient(
-    140deg,
-    var(--core),
-    color-mix(in srgb, var(--cyan) 7%, var(--core))
-  );
+  background: var(--core);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-md);

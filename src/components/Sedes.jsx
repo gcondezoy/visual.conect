@@ -22,14 +22,30 @@ const GRUPOS = [
 
 const ease = [0.32, 0.72, 0, 1]
 
+// Cuántas fotos entran sin volver interminable la sección.
+function usarEsMovil() {
+  const [esMovil, setEsMovil] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 520px)').matches,
+  )
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 520px)')
+    const alCambiar = (e) => setEsMovil(e.matches)
+    mq.addEventListener('change', alCambiar)
+    return () => mq.removeEventListener('change', alCambiar)
+  }, [])
+  return esMovil
+}
+
 export default function Sedes() {
   const [activa, setActiva] = useState(GRUPOS[0].id)
   const [visor, setVisor] = useState(null) // índice de la foto ampliada
+  const esMovil = usarEsMovil()
 
   const grupo = GRUPOS.find((g) => g.id === activa)
   const fotos = grupo.fotos
-  // Seis por sede reparten bien las tres columnas; el resto está en el visor.
-  const visibles = fotos.slice(0, 6)
+  // Seis reparten bien las tres columnas del escritorio; en el móvil, con dos
+  // columnas, cuatro bastan para dar idea del equipo sin alargar el scroll.
+  const visibles = fotos.slice(0, esMovil ? 4 : 6)
 
   const total = fotos.length
   const mover = (paso) =>

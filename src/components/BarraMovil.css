@@ -1,0 +1,72 @@
+.barra-movil-centinela {
+  position: absolute;
+  top: 700px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* Solo en móvil: en escritorio la navegación siempre está a la vista. */
+.barra-movil {
+  display: none;
+}
+
+@media (max-width: 1020px) {
+  .barra-movil {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    /* Respeta la barra inferior del navegador en iOS. */
+    padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--shell-line);
+    box-shadow: var(--ambient-lift);
+    transform: translateY(110%);
+    transition: transform 0.55s var(--ease-fluid);
+  }
+
+  .barra-movil.is-visible {
+    transform: translateY(0);
+  }
+
+  .barra-movil-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px; /* cómodo con el pulgar */
+    border-radius: var(--r-pill);
+    font-size: 0.94rem;
+    font-weight: 600;
+    transition: transform 0.4s var(--ease-fluid);
+  }
+
+  .barra-movil-btn:active {
+    transform: scale(0.97);
+  }
+
+  .barra-movil-btn--principal {
+    background: var(--accent);
+    color: #221302;
+  }
+
+  .barra-movil-btn--wa {
+    background: var(--whatsapp);
+    color: #05301a;
+  }
+}
+
+/* En móvil manda la barra: el botón flotante ofrecía la misma acción de
+   WhatsApp y apilar los dos sobre el pulgar solo estorba. */
+@media (max-width: 1020px) {
+  .fab-wa {
+    display: none;
+  }
+}

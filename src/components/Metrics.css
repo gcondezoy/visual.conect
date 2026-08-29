@@ -1,11 +1,7 @@
 .metrics {
   padding-block: 2.5rem;
-  border-block: 1px solid var(--border);
-  background: linear-gradient(
-    120deg,
-    rgba(247, 145, 30, 0.06),
-    rgba(53, 189, 236, 0.06)
-  );
+  border-block: 1px solid var(--shell-line);
+  background: var(--shell);
 }
 
 .metrics__inner {
@@ -33,14 +29,13 @@
   background: var(--border);
 }
 
+/* Cifra en un solo color de marca: el degradado sobre el texto lo dejaba
+   medio desvaído en los bordes. */
 .metric__value {
   font-size: clamp(2.2rem, 4.5vw, 3.2rem);
   font-weight: 700;
   line-height: 1;
-  background: linear-gradient(120deg, var(--accent), var(--cyan));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--accent-text);
 }
 
 .metric__label {

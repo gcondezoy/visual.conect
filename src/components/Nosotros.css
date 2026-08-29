@@ -57,11 +57,7 @@
 /* --- Valores --- */
 .valores {
   padding: 2.2rem;
-  background: linear-gradient(
-    130deg,
-    var(--core),
-    color-mix(in srgb, var(--cyan) 6%, var(--core))
-  );
+  background: var(--core);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
 }

@@ -49,11 +49,7 @@
 /* --- Salarios --- */
 .trabaja__salarios {
   padding: 1.5rem;
-  background: linear-gradient(
-    130deg,
-    color-mix(in srgb, var(--accent) 11%, var(--core)),
-    var(--core)
-  );
+  background: var(--core);
   border: 1px solid var(--accent-soft);
   border-radius: var(--r-md);
   margin-bottom: 1.8rem;

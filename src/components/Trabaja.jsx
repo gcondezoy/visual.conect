@@ -129,6 +129,8 @@ export default function Trabaja() {
                 </label>
                 <input
                   id="t-nombre"
+                  autoComplete="given-name"
+                  autoCapitalize="words"
                   type="text"
                   placeholder="Juan Carlos"
                   value={form.nombre}
@@ -143,6 +145,8 @@ export default function Trabaja() {
                 </label>
                 <input
                   id="t-apellidos"
+                  autoComplete="family-name"
+                  autoCapitalize="words"
                   type="text"
                   placeholder="Pérez Gómez"
                   value={form.apellidos}
@@ -159,6 +163,10 @@ export default function Trabaja() {
                 <label htmlFor="t-email">Correo</label>
                 <input
                   id="t-email"
+                  autoComplete="email"
+                  inputMode="email"
+                  autoCapitalize="off"
+                  spellCheck={false}
                   type="email"
                   placeholder="tucorreo@ejemplo.com"
                   value={form.email}
@@ -171,6 +179,8 @@ export default function Trabaja() {
                 <label htmlFor="t-telefono">Teléfono</label>
                 <input
                   id="t-telefono"
+                  autoComplete="tel"
+                  inputMode="tel"
                   type="tel"
                   placeholder="9XX XXX XXX"
                   value={form.telefono}
@@ -186,6 +196,8 @@ export default function Trabaja() {
                 </label>
                 <input
                   id="t-ciudad"
+                  autoComplete="address-level2"
+                  autoCapitalize="words"
                   type="text"
                   placeholder="Lima, Trujillo..."
                   value={form.ciudad}

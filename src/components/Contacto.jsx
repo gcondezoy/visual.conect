@@ -129,6 +129,8 @@ export default function Contacto() {
                 </label>
                 <input
                   id="c-nombre"
+                  autoComplete="name"
+                  autoCapitalize="words"
                   type="text"
                   placeholder="Tu nombre"
                   value={form.nombre}
@@ -141,6 +143,10 @@ export default function Contacto() {
                 <label htmlFor="c-email">Correo</label>
                 <input
                   id="c-email"
+                  autoComplete="email"
+                  inputMode="email"
+                  autoCapitalize="off"
+                  spellCheck={false}
                   type="email"
                   placeholder="tucorreo@ejemplo.com"
                   value={form.email}

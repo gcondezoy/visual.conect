@@ -65,10 +65,9 @@
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(53, 189, 236, 0.18), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
+  /* El halo difuso se retira: con colores planos, el realce de la tarjeta al
+     pasar el cursor lo dan el borde y la sombra. */
+  display: none;
 }
 .servicio:hover .servicio__glow {
   opacity: 1;

@@ -10,6 +10,7 @@ import Trabaja from './components/Trabaja.jsx'
 import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
 import FloatingWhatsApp from './components/FloatingWhatsApp.jsx'
+import BarraMovil from './components/BarraMovil.jsx'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <BarraMovil />
     </>
   )
 }

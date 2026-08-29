@@ -177,17 +177,15 @@ body {
     color 0.5s var(--ease-fluid);
 }
 
-/* Malla de resplandores de marca — capa fija, nunca repinta con el scroll */
+/* Fondo de un solo color plano. Antes llevaba dos resplandores radiales de
+   marca; se retiran por pedido del cliente: colores enteros, sin veladuras. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 50% at 12% 0%, var(--mesh-a), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 92% 78%, var(--mesh-b), transparent 62%),
-    var(--bg);
+  background: var(--bg);
   transition: background 0.5s var(--ease-fluid);
 }
 
@@ -256,9 +254,10 @@ p {
   padding-inline: clamp(1.15rem, 4vw, 2.5rem);
 }
 
-/* Respiración amplia: las secciones deben poder respirar */
+/* Respiración amplia en escritorio; en el móvil el aire de sobra solo suma
+   scroll, así que el mínimo baja. */
 .section {
-  padding-block: clamp(5.5rem, 11vw, 10rem);
+  padding-block: clamp(3.5rem, 11vw, 10rem);
   position: relative;
 }
 

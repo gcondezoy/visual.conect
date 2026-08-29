@@ -4,7 +4,12 @@
   background: var(--bg-2);
 }
 
-/* --- Banner KMT --- */
+/* --- Banner KMT ---
+   Va montado sobre la costura entre la última sección y el pie. Antes el
+   fondo era un degradado translúcido sobre un ::before con z-index -1: ese
+   pseudo se pintaba por detrás del pie, así que el borde superior del pie
+   cruzaba el banner por la mitad. Ahora es una pieza opaca de una sola capa
+   y tapa la costura en vez de dejarla ver. */
 .kmt-banner {
   display: flex;
   align-items: center;
@@ -14,23 +19,23 @@
   margin-top: -3.5rem;
   margin-bottom: 3.5rem;
   padding: 2.2rem 2.5rem;
-  background: linear-gradient(
-    120deg,
-    rgba(247, 145, 30, 0.16),
-    rgba(53, 189, 236, 0.14)
-  );
-  border: 1px solid var(--border-strong);
+  background: var(--core);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--ambient-lift);
   position: relative;
+  z-index: 1; /* por delante del pie, no por detrás */
   overflow: hidden;
 }
+
+/* Filete naranja al costado: da color de marca sin recurrir a un degradado. */
 .kmt-banner::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: var(--surface);
-  z-index: -1;
+  inset-block: 0;
+  left: 0;
+  width: 5px;
+  background: var(--accent);
 }
 
 .kmt-banner__eyebrow {
