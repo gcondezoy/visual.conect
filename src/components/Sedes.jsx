@@ -28,8 +28,8 @@ export default function Sedes() {
 
   const grupo = GRUPOS.find((g) => g.id === activa)
   const fotos = grupo.fotos
-  // Una destacada (2×2) + cuatro pequeñas llenan la rejilla sin huecos.
-  const visibles = fotos.slice(0, 5)
+  // Seis por sede reparten bien las tres columnas; el resto está en el visor.
+  const visibles = fotos.slice(0, 6)
 
   const total = fotos.length
   const mover = (paso) =>
@@ -125,17 +125,16 @@ export default function Sedes() {
               </div>
             </aside>
 
-            {/* Mosaico: una foto grande más cuatro pequeñas cierran exactamente
-                dos filas. El resto vive en el visor, tras el contador. */}
+            {/* Mosaico en columnas: cada foto conserva su proporción real y la
+                rejilla se acomoda a ella, sin recortes ni marcos vacíos. */}
             <div className="sede-mosaico">
               {visibles.map((foto, i) => {
                 const esUltima = i === visibles.length - 1
                 const restantes = fotos.length - visibles.length
                 return (
                   <button
-                    key={foto}
+                    key={foto.src}
                     className="sede-foto"
-                    data-destacada={i === 0}
                     onClick={() => setVisor(i)}
                     aria-label={
                       esUltima && restantes > 0
@@ -144,12 +143,12 @@ export default function Sedes() {
                     }
                   >
                     <img
-                      src={foto}
+                      src={foto.src}
                       alt={`Equipo de Visual Connections en ${grupo.ciudad}`}
                       loading="lazy"
                       decoding="async"
-                      width="1000"
-                      height="750"
+                      width={foto.ancho}
+                      height={foto.alto}
                     />
                     {esUltima && restantes > 0 && (
                       <span className="sede-foto-mas mono" aria-hidden="true">
@@ -194,8 +193,10 @@ export default function Sedes() {
             </button>
 
             <motion.img
-              key={fotos[visor]}
-              src={fotos[visor]}
+              key={fotos[visor].src}
+              src={fotos[visor].src}
+              width={fotos[visor].ancho}
+              height={fotos[visor].alto}
               alt={`Equipo de Visual Connections en ${grupo.ciudad}`}
               className="visor-img"
               initial={{ scale: 0.94, opacity: 0 }}

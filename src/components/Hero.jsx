@@ -1,7 +1,6 @@
 import { motion } from 'motion/react'
 import { ArrowDown, WhatsappLogo, Broadcast } from '@phosphor-icons/react'
 import { NEGOCIO } from '../config.js'
-import LogoMark from './LogoMark.jsx'
 import './Hero.css'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -65,36 +64,11 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="hero__partners"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            className="hero__stats"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.32, ease }}
           >
-            <span className="hero__partners-label">Trabajamos con</span>
-            <span className="hero__partner hero__partner--win">win</span>
-            <span className="hero__partners-dot">·</span>
-            <span className="hero__partner hero__partner--entel">entel</span>
-          </motion.div>
-        </div>
-
-        {/* Visual animado: antena + ondas de señal */}
-        <motion.div
-          className="hero__visual"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease }}
-          aria-hidden="true"
-        >
-          <div className="signal">
-            <span className="signal__ring signal__ring--1" />
-            <span className="signal__ring signal__ring--2" />
-            <span className="signal__ring signal__ring--3" />
-            <div className="signal__core">
-              <LogoMark variante="mark" alto={148} />
-            </div>
-          </div>
-
-          <div className="hero__stats">
             <div className="hero__stat">
               <strong className="mono">+65</strong>
               <span>cuadrillas técnicas</span>
@@ -103,8 +77,24 @@ export default function Hero() {
               <strong className="mono">4</strong>
               <span>sedes a nivel nacional</span>
             </div>
-          </div>
-        </motion.div>
+            <div className="hero__stat">
+              <strong className="mono">2021</strong>
+              <span>operando en el país</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="hero__partners"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.44 }}
+          >
+            <span className="hero__partners-label">Trabajamos con</span>
+            <span className="hero__partner hero__partner--win">win</span>
+            <span className="hero__partners-dot">·</span>
+            <span className="hero__partner hero__partner--entel">entel</span>
+          </motion.div>
+        </div>
       </div>
 
       <a href="#nosotros" className="hero__scroll" aria-label="Ir a la siguiente sección">

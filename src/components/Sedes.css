@@ -137,36 +137,34 @@
 }
 
 /* Mosaico -------------------------------------------------------------- */
+/* Columnas tipo mampostería: cada foto ocupa el alto que le toca por su
+   proporción real. Nada se recorta y no quedan marcos vacíos. */
 .sede-mosaico {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.7rem;
+  column-count: 3;
+  column-gap: 0.7rem;
 }
 
 .sede-foto {
   position: relative;
+  display: block;
+  width: 100%;
   overflow: hidden;
   border-radius: var(--r-md);
   border: 1px solid var(--shell-line);
   background: var(--shell);
-  aspect-ratio: 4 / 3;
   padding: 0;
+  margin-bottom: 0.7rem;
+  /* Evita que una foto quede partida entre dos columnas. */
+  break-inside: avoid;
   transition:
     transform 0.65s var(--ease-fluid),
     border-color 0.5s var(--ease-fluid),
     box-shadow 0.65s var(--ease-fluid);
 }
 
-/* La primera foto de cada sede ancla el mosaico. */
-.sede-foto[data-destacada='true'] {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
 .sede-foto img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* la altura la manda la foto, no la rejilla */
   transition:
     transform 0.9s var(--ease-fluid),
     filter 0.6s var(--ease-fluid);
@@ -210,6 +208,8 @@
 }
 
 /* ------------------------------------------------------------ Visor ---- */
+/* El visor va oscuro en ambos temas: una fotografía se mira sobre fondo
+   neutro, y sobre blanco quedaba un marco que competía con la imagen. */
 .visor {
   position: fixed;
   inset: 0;
@@ -217,20 +217,23 @@
   display: grid;
   place-items: center;
   padding: clamp(1rem, 5vw, 3rem);
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  background: rgba(6, 11, 18, 0.975);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
 
+/* La foto conserva su proporción y se ajusta al hueco disponible. */
 .visor-img {
-  max-width: min(1100px, 92vw);
-  max-height: 82vh;
   width: auto;
-  border-radius: var(--r-lg);
-  box-shadow: var(--ambient-lift);
+  height: auto;
+  max-width: min(1280px, 94vw);
+  max-height: 86vh;
+  object-fit: contain;
+  border-radius: var(--r-md);
   cursor: default;
 }
 
+/* Los controles no dependen del tema: el visor siempre es oscuro. */
 .visor-cerrar,
 .visor-nav {
   position: absolute;
@@ -239,9 +242,9 @@
   width: 2.9rem;
   height: 2.9rem;
   border-radius: var(--r-pill);
-  border: 1px solid var(--shell-line);
-  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
-  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eaf2fa;
   transition:
     transform 0.5s var(--ease-fluid),
     border-color 0.4s var(--ease-fluid),
@@ -250,8 +253,8 @@
 
 .visor-cerrar:hover,
 .visor-nav:hover {
-  color: var(--accent-text);
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   transform: scale(1.07);
 }
 
@@ -272,11 +275,11 @@
   bottom: clamp(1rem, 3vw, 2rem);
   font-size: 0.76rem;
   letter-spacing: 0.14em;
-  color: var(--muted);
+  color: rgba(234, 242, 250, 0.72);
   padding: 0.4rem 0.9rem;
   border-radius: var(--r-pill);
-  border: 1px solid var(--shell-line);
-  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ------------------------------------------------------------ Móvil ---- */
@@ -288,14 +291,13 @@
     position: static;
   }
   .sede-mosaico {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
   }
 }
 
 @media (max-width: 520px) {
-  .sede-foto[data-destacada='true'] {
-    grid-column: span 2;
-    grid-row: span 1;
+  .sede-mosaico {
+    column-count: 1;
   }
   .sede-tab {
     flex: 1 1 auto;

@@ -60,13 +60,10 @@
 }
 
 /* ---------- Layout ---------- */
+/* Una sola columna: el titular manda y nada le compite al lado. */
 .hero__inner {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  gap: 3rem;
   width: 100%;
   padding-block: 4rem;
 }
@@ -143,92 +140,18 @@
   color: var(--muted);
 }
 
-/* ---------- Visual: antena + ondas ---------- */
-.hero__visual {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-}
-
-.signal {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  display: grid;
-  place-items: center;
-}
-
-.signal__ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid var(--border-strong);
-  inset: 0;
-}
-.signal__ring--1 {
-  inset: 0;
-  animation: pulse-ring 3.2s ease-out infinite;
-}
-.signal__ring--2 {
-  inset: 42px;
-  border-color: rgba(53, 189, 236, 0.35);
-  animation: pulse-ring 3.2s ease-out infinite 0.5s;
-}
-.signal__ring--3 {
-  inset: 84px;
-  border-color: rgba(247, 145, 30, 0.4);
-  animation: pulse-ring 3.2s ease-out infinite 1s;
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.85);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1.25);
-    opacity: 0;
-  }
-}
-
-.signal__core {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 50% 40%, var(--surface-2), var(--surface));
-  border: 1px solid var(--border-strong);
-  border-radius: 50%;
-  box-shadow: var(--glow-cyan);
-}
-.signal__core img {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
-  animation: bob 5s ease-in-out infinite;
-}
-
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
 .hero__stats {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 2.4rem;
 }
 .hero__stat {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1rem 1.4rem;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.9rem 1.5rem;
   background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
   border: 1px solid var(--shell-line);
   border-radius: var(--r-md);
@@ -300,43 +223,11 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .hero__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    text-align: center;
     padding-block: 2.5rem 5rem;
   }
   .hero__title,
   .hero__lead {
     max-width: none;
-  }
-  .hero__eyebrow,
-  .hero__actions,
-  .hero__partners {
-    justify-content: center;
-  }
-  .hero__actions {
-    justify-content: center;
-  }
-  .hero__visual {
-    order: -1;
-  }
-  .signal {
-    width: 240px;
-    height: 240px;
-  }
-  .signal__core {
-    width: 140px;
-    height: 140px;
-  }
-  .signal__core img {
-    width: 104px;
-    height: 104px;
-  }
-  .signal__ring--2 {
-    inset: 32px;
-  }
-  .signal__ring--3 {
-    inset: 64px;
   }
   .hero__wa-hint {
     display: none;
@@ -344,14 +235,24 @@
 }
 
 @media (max-width: 480px) {
+  /* El badge cabe en una línea; si aún parte, el icono se alinea al texto
+     en vez de quedar centrado sobre las dos líneas. */
+  .hero__eyebrow {
+    align-items: flex-start;
+    font-size: 0.7rem;
+    padding: 0.45rem 0.85rem;
+  }
+  .hero__eyebrow svg {
+    flex: none;
+    margin-top: 0.05rem;
+  }
   .hero__stats {
-    flex-direction: column;
     width: 100%;
-    max-width: 260px;
   }
   .hero__stat {
+    flex: 1 1 100%;
     flex-direction: row;
-    justify-content: center;
+    align-items: baseline;
     gap: 0.6rem;
   }
   .hero__stat span {

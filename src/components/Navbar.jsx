@@ -76,7 +76,7 @@ export default function Navbar() {
       <header className={`nav ${compacta ? 'is-compacta' : ''}`}>
         <div className="nav-isla">
           <a href="#inicio" className="nav-marca" onClick={cerrar}>
-            <LogoMark variante="lockup" alto={44} alt="Corporación Visual Connections" />
+            <LogoMark variante="lockup" alto={58} alt="Corporación Visual Connections" />
           </a>
 
           <nav className="nav-links" aria-label="Navegación principal">

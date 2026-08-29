@@ -8,7 +8,7 @@
  * Uso:  node scripts/build-assets.mjs
  */
 import sharp from 'sharp'
-import { readdir, mkdir, rm, writeFile } from 'node:fs/promises'
+import { readdir, mkdir, rename, stat, writeFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
@@ -16,9 +16,13 @@ const RAIZ = path.resolve(import.meta.dirname, '..')
 const IMG = path.join(RAIZ, 'public', 'img')
 const ORIGEN_SEDES = path.join(IMG, 'sedes')
 const DESTINO_SEDES = path.join(IMG, 'sedes')
+// Fuera de public/: no se publica, pero se conserva.
+const ARCHIVO_ORIGINALES = path.join(RAIZ, '_originales', 'sedes')
 
-// Formato uniforme para toda la galería
-const FOTO = { ancho: 1000, alto: 750, calidad: 72 }
+// Las fotos conservan su proporción original; solo se acota el lado mayor.
+// Recortarlas a un formato fijo mutila encuadres (gente cortada, carteles a
+// medias), así que la rejilla se adapta a la foto y no al revés.
+const FOTO = { ladoMax: 1400, calidad: 74 }
 
 // Carpeta original -> prefijo de archivo
 const GRUPOS = {
@@ -48,7 +52,12 @@ async function convertirFotos() {
       const yaConvertidas = (await readdir(DESTINO_SEDES))
         .filter((f) => new RegExp(`^${prefijo}-\\d+\\.webp$`).test(f))
         .sort()
-      manifiesto[prefijo] = yaConvertidas.map((f) => `/img/sedes/${f}`)
+      manifiesto[prefijo] = await Promise.all(
+        yaConvertidas.map(async (f) => {
+          const m = await sharp(path.join(DESTINO_SEDES, f)).metadata()
+          return { src: `/img/sedes/${f}`, ancho: m.width, alto: m.height }
+        }),
+      )
       console.log(`  · ${carpeta}: ya convertida (${yaConvertidas.length} fotos)`)
       continue
     }
@@ -64,32 +73,48 @@ async function convertirFotos() {
       const nombre = `${prefijo}-${String(i + 1).padStart(2, '0')}.webp`
       const salida = path.join(DESTINO_SEDES, nombre)
 
-      const meta = await sharp(entrada).metadata()
-      totalOrigen += meta.size ?? 0
+      const bytesOrigen = (await stat(entrada)).size
+      totalOrigen += bytesOrigen
 
-      const buf = await sharp(entrada)
+      const { data: buf, info } = await sharp(entrada)
         .rotate() // respeta la orientación EXIF
-        .resize(FOTO.ancho, FOTO.alto, {
-          fit: 'cover',
-          position: sharp.strategy.attention, // recorte inteligente: conserva a las personas
+        .resize(FOTO.ladoMax, FOTO.ladoMax, {
+          fit: 'inside', // cabe dentro del cuadro sin recortar ni deformar
+          withoutEnlargement: true, // nunca se estira una foto pequeña
         })
         .webp({ quality: FOTO.calidad, effort: 6 })
-        .toBuffer()
+        .toBuffer({ resolveWithObject: true })
 
       await writeFile(salida, buf)
       totalFinal += buf.length
 
-      manifiesto[prefijo].push(`/img/sedes/${nombre}`)
+      // La galería necesita las medidas finales para reservar el espacio de
+      // cada foto antes de que cargue (sin saltos de maquetación).
+      manifiesto[prefijo].push({
+        src: `/img/sedes/${nombre}`,
+        ancho: info.width,
+        alto: info.height,
+      })
       console.log(
-        `  ✓ ${nombre.padEnd(16)} ${String(meta.width).padStart(4)}×${String(meta.height).padEnd(4)} → ${FOTO.ancho}×${FOTO.alto}  ${kb(meta.size ?? 0).padStart(7)} → ${kb(buf.length).padStart(7)}`,
+        `  ✓ ${nombre.padEnd(16)} ${String(info.width).padStart(4)}×${String(info.height).padEnd(5)} ${kb(bytesOrigen).padStart(7)} → ${kb(buf.length).padStart(7)}`,
       )
     }
   }
 
-  // Las carpetas originales ya no se necesitan en public/ (se servirían tal cual)
+  // Los originales se apartan a _originales/, fuera de public/, para que no se
+  // publiquen pero tampoco se pierdan: son la única fuente si hay que volver a
+  // generar la galería con otro tamaño o encuadre. NUNCA se borran.
   for (const carpeta of Object.keys(GRUPOS)) {
     const dir = path.join(ORIGEN_SEDES, carpeta)
-    if (existsSync(dir)) await rm(dir, { recursive: true, force: true })
+    if (!existsSync(dir)) continue
+    const destino = path.join(ARCHIVO_ORIGINALES, carpeta)
+    await mkdir(path.dirname(destino), { recursive: true })
+    if (existsSync(destino)) {
+      console.log(`  · ${carpeta}: ya archivada en _originales/, se deja como está`)
+      continue
+    }
+    await rename(dir, destino)
+    console.log(`  · ${carpeta}: originales archivados en _originales/`)
   }
 
   if (totalOrigen > 0) {

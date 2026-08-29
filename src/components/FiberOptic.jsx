@@ -4,6 +4,10 @@ import './FiberOptic.css'
 const HEBRAS = 7
 const PULSOS_POR_HEBRA = 2
 
+// Tope del empuje que el scroll añade por frame. Sin él, un golpe de rueda
+// mueve los pulsos varias pantallas de una vez y el fondo marea.
+const EMPUJE_MAX = 0.006
+
 // Cyan de señal y naranja del emisor, en RGB para poder modular el alfa.
 const COLORES = [
   [53, 189, 236],
@@ -33,7 +37,7 @@ function crearHebras() {
       color: COLORES[i % COLORES.length],
       pulsos: Array.from({ length: PULSOS_POR_HEBRA }, (_, j) => ({
         t: ruido(i * 10 + j + 3), // posición 0-1 a lo largo de la hebra
-        velocidad: 0.055 + ruido(i * 7 + j + 5) * 0.07,
+        velocidad: 0.03 + ruido(i * 7 + j + 5) * 0.04,
         largo: 0.1 + ruido(i * 3 + j + 9) * 0.13,
         brillo: 0.5 + ruido(i * 5 + j + 13) * 0.5,
       })),
@@ -98,11 +102,16 @@ export default function FiberOptic() {
       const scroll = window.scrollY
       const delta = scroll - ultimoScroll
       ultimoScroll = scroll
-      empuje += delta * 0.0016
-      empuje *= 0.92 // fricción: al dejar de scrollear vuelve al ritmo base
+
+      // El scroll acompaña el movimiento, no lo dispara: el aporte es pequeño,
+      // está acotado y se disipa rápido. Un desplazamiento brusco no debe
+      // lanzar los pulsos de golpe — eso es lo que marea.
+      empuje += delta * 0.00035
+      empuje = Math.max(-EMPUJE_MAX, Math.min(EMPUJE_MAX, empuje))
+      empuje *= 0.86 // fricción: al soltar, vuelve enseguida al ritmo base
 
       // Deriva lenta para que la malla respire aunque nadie scrollee
-      const deriva = tiempo * 0.00006
+      const deriva = tiempo * 0.00004
 
       ctx.clearRect(0, 0, ancho, alto)
 

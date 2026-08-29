@@ -248,6 +248,15 @@
 }
 
 /* ------------------------------------------------------------ Móvil ---- */
+/* El lockup se achica en pantallas chicas conservando su proporción
+   (531 : 264 ≈ 2.011). */
+@media (max-width: 620px) {
+  .nav-marca .logomark {
+    --logo-alto: 44px;
+    --logo-ancho: 88px;
+  }
+}
+
 @media (max-width: 1020px) {
   .nav-links {
     display: none;
