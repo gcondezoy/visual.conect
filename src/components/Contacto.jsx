@@ -86,7 +86,7 @@ export default function Contacto() {
                 <WhatsappLogo weight="fill" size={22} />
                 <div>
                   <span>WhatsApp</span>
-                  <strong>Escríbenos ahora</strong>
+                  <strong>{NEGOCIO.whatsappVisible}</strong>
                 </div>
               </a>
             </div>

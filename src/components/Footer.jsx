@@ -93,7 +93,7 @@ export default function Footer() {
             <EnvelopeSimple weight="fill" size={15} /> {NEGOCIO.email}
           </a>
           <a href={buildWhatsAppLink('¡Hola Visual Connections!')} target="_blank" rel="noreferrer">
-            <WhatsappLogo weight="fill" size={15} /> WhatsApp
+            <WhatsappLogo weight="fill" size={15} /> {NEGOCIO.whatsappVisible}
           </a>
         </div>
       </div>

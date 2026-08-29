@@ -7,10 +7,11 @@ export const NEGOCIO = {
   nombreCorto: 'Visual Connections',
   fundacion: 2021,
 
-  // --- Contacto (PLACEHOLDERS — reemplazar con datos reales) ---
-  // WhatsApp en formato internacional SIN el signo "+" ni espacios.
-  // Ej: 51987654321  (51 = Perú)
-  whatsapp: '51999999999',
+  // --- Contacto ---
+  // WhatsApp en formato internacional SIN el signo "+" ni espacios
+  // (51 = Perú). Aquí llegan las postulaciones y las consultas.
+  whatsapp: '51955314800',
+  whatsappVisible: '955 314 800', // cómo se muestra en pantalla
   telefono: '(01) 707-3000',
   email: 'contacto@visualconnections.pe',
 
@@ -18,9 +19,9 @@ export const NEGOCIO = {
   // Reemplazar "#" por la URL real cuando esté lista.
   kmtUrl: '#',
 
-  // --- Redes sociales (opcional; dejar '' para ocultar) ---
+  // --- Redes sociales (dejar '' oculta el icono) ---
   redes: {
-    facebook: '',
+    facebook: 'https://www.facebook.com/share/1KNQ6tjQLz/',
     instagram: '',
     linkedin: '',
   },
