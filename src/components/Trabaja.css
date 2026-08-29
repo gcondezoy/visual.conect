@@ -1,0 +1,141 @@
+.trabaja {
+  background: linear-gradient(180deg, transparent, rgba(12, 30, 46, 0.5), transparent);
+}
+
+.trabaja__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* --- Info --- */
+.trabaja__info .section-lead {
+  margin-bottom: 2rem;
+}
+
+.trabaja__meta {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.trabaja__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.trabaja__meta-item svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.trabaja__meta-item span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.trabaja__meta-item strong {
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+/* --- Salarios --- */
+.trabaja__salarios {
+  padding: 1.5rem;
+  background: linear-gradient(
+    130deg,
+    rgba(247, 145, 30, 0.1),
+    rgba(18, 40, 59, 0.5)
+  );
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--r-md);
+  margin-bottom: 1.8rem;
+}
+.trabaja__salarios h3 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+.trabaja__salarios ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+.trabaja__salarios li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+.trabaja__salarios li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.trabaja__salarios strong {
+  font-size: 1.1rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* --- Requisitos --- */
+.trabaja__reqs {
+  margin-bottom: 1.5rem;
+}
+.trabaja__reqs h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+}
+.trabaja__reqs ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+.trabaja__reqs li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+.trabaja__reqs svg {
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+.trabaja__jornada {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.trabaja__jornada strong {
+  color: var(--text-soft);
+}
+
+/* --- Formulario --- */
+.trabaja__form-wrap {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 900px) {
+  .trabaja__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .trabaja__form-wrap {
+    position: static;
+  }
+}

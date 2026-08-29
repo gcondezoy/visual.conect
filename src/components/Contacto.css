@@ -1,0 +1,135 @@
+.contacto__head {
+  max-width: 58ch;
+  margin-bottom: 3rem;
+}
+
+.contacto__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* --- Info cards --- */
+.contacto__cards {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.cinfo {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+.cinfo:hover {
+  transform: translateX(4px);
+  border-color: var(--border-strong);
+}
+.cinfo svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.cinfo--wa svg {
+  color: #25d366;
+}
+.cinfo span {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.cinfo strong {
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+/* --- Horarios + sedes --- */
+.contacto__horarios,
+.contacto__sedes {
+  padding: 1.4rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  margin-bottom: 1rem;
+}
+.contacto__horarios h3,
+.contacto__sedes h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.contacto__horarios h3 svg,
+.contacto__sedes h3 svg {
+  color: var(--cyan);
+}
+
+.contacto__horarios ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+.contacto__horarios li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+.contacto__horarios strong {
+  color: var(--text);
+}
+
+.contacto__sedes ul {
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+}
+.contacto__sedes li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--accent);
+}
+.contacto__sedes strong {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.contacto__sedes span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* --- Form --- */
+.contacto__form-wrap {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  padding: 2rem;
+  background: linear-gradient(
+    140deg,
+    var(--surface),
+    rgba(23, 50, 74, 0.6)
+  );
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 880px) {
+  .contacto__grid {
+    grid-template-columns: 1fr;
+  }
+  .contacto__form-wrap {
+    position: static;
+  }
+}
