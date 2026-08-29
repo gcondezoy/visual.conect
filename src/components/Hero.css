@@ -78,7 +78,7 @@
   letter-spacing: 0.08em;
   color: var(--accent);
   padding: 0.5rem 1rem;
-  border: 1px solid var(--accent-soft);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-pill);
   background: var(--accent-soft);
   margin-bottom: 1.5rem;
@@ -152,12 +152,10 @@
   align-items: flex-start;
   text-align: left;
   padding: 0.9rem 1.5rem;
-  background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
+  background: var(--bg-elevated);
   border: 1px solid var(--shell-line);
   border-radius: var(--r-md);
   box-shadow: var(--ambient);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 .hero__stat strong {
   font-size: 1.7rem;
@@ -179,14 +177,12 @@
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--shell-line);
   color: var(--text-soft);
-  background: color-mix(in srgb, var(--bg-elevated) 65%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--bg-elevated);
   animation: bounce 2s ease-in-out infinite;
 }
 @keyframes bounce {
@@ -209,12 +205,12 @@
   gap: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #25d366;
+  color: var(--wa-texto);
   padding: 0.5rem 0.9rem;
-  border: 1px solid rgba(37, 211, 102, 0.3);
+  border: 1px solid var(--wa-linea);
   border-radius: var(--r-pill);
-  background: rgba(37, 211, 102, 0.08);
-  transition: transform 0.2s ease;
+  background: var(--wa-suave);
+  transition: transform 0.4s var(--ease-fluid);
 }
 .hero__wa-hint:hover {
   transform: translateY(-2px);

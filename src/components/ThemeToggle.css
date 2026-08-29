@@ -6,7 +6,7 @@
   height: 2.5rem;
   border-radius: var(--r-pill);
   color: var(--text-soft);
-  background: color-mix(in srgb, var(--text) 5%, transparent);
+  background: var(--shell);
   border: 1px solid var(--shell-line);
   flex: none;
   transition:
@@ -18,12 +18,20 @@
 
 .tema-toggle:hover {
   color: var(--accent-text);
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  border-color: var(--accent-line);
   background: var(--accent-soft);
 }
 
 .tema-toggle:active {
   transform: scale(0.93);
+}
+
+/* Mínimo táctil de 44 px en pantallas donde se usa el dedo. */
+@media (max-width: 1020px) {
+  .tema-toggle {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 /* Los dos iconos ocupan la misma celda; solo uno está presente a la vez. */

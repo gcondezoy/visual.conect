@@ -31,14 +31,14 @@
 .sede-tab:hover {
   color: var(--text);
   transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--cyan) 35%, transparent);
+  border-color: var(--cyan-line);
 }
 
 .sede-tab[data-activa='true'] {
   background: var(--accent);
   border-color: transparent;
   color: #221302;
-  box-shadow: 0 10px 28px -10px color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: var(--ambient);
 }
 
 .sede-tab-badge {
@@ -46,14 +46,14 @@
   letter-spacing: 0.06em;
   padding: 0.16rem 0.5rem;
   border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--text) 9%, transparent);
+  background: var(--sobre-oscuro);
   color: var(--muted);
   white-space: nowrap;
 }
 
 .sede-tab[data-activa='true'] .sede-tab-badge {
-  background: rgba(0, 0, 0, 0.16);
-  color: #3a2405;
+  background: #d97d10;
+  color: #2b1a03;
 }
 
 /* ------------------------------------------------------------ Panel ---- */
@@ -178,7 +178,7 @@
 
 .sede-foto:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
+  border-color: var(--cyan-line);
   box-shadow: var(--ambient-lift);
 }
 
@@ -187,24 +187,27 @@
   filter: saturate(1.06) contrast(1.03);
 }
 
-/* Contador de las fotos que solo se ven en el visor. */
+/* Contador de las fotos restantes: chip opaco en la esquina, para no tapar
+   la fotografía con un velo. */
 .sede-foto-mas {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  right: 0.6rem;
+  bottom: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #fff;
-  background: color-mix(in srgb, var(--navy) 62%, transparent);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  transition: background 0.5s var(--ease-fluid);
+  letter-spacing: 0.04em;
+  color: #221302;
+  background: var(--accent);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-pill);
+  box-shadow: var(--ambient);
+  transition: transform 0.5s var(--ease-fluid);
 }
 
 .sede-foto:hover .sede-foto-mas {
-  background: color-mix(in srgb, var(--navy) 45%, transparent);
+  transform: scale(1.06);
 }
 
 /* ------------------------------------------------------------ Visor ---- */
@@ -217,9 +220,7 @@
   display: grid;
   place-items: center;
   padding: clamp(1rem, 5vw, 3rem);
-  background: rgba(6, 11, 18, 0.975);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: #060b12;
 }
 
 /* La foto conserva su proporción y se ajusta al hueco disponible. */
@@ -242,8 +243,8 @@
   width: 2.9rem;
   height: 2.9rem;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid #2b3b4c;
+  background: #16222f;
   color: #eaf2fa;
   transition:
     transform 0.5s var(--ease-fluid),
@@ -254,7 +255,7 @@
 .visor-cerrar:hover,
 .visor-nav:hover {
   color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  border-color: var(--accent);
   transform: scale(1.07);
 }
 
@@ -275,11 +276,11 @@
   bottom: clamp(1rem, 3vw, 2rem);
   font-size: 0.76rem;
   letter-spacing: 0.14em;
-  color: rgba(234, 242, 250, 0.72);
+  color: #9fb3c4;
   padding: 0.4rem 0.9rem;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #24313f;
+  background: #101a25;
 }
 
 /* ------------------------------------------------------------ Móvil ---- */
@@ -296,11 +297,34 @@
 }
 
 @media (max-width: 520px) {
+  /* Dos columnas, no una: a una sola columna las seis fotos sumaban más de
+     tres pantallas de scroll y la sección se volvía interminable. */
   .sede-mosaico {
-    column-count: 1;
+    column-count: 2;
+    column-gap: 0.5rem;
+  }
+  .sede-foto {
+    margin-bottom: 0.5rem;
   }
   .sede-tab {
     flex: 1 1 auto;
     justify-content: center;
+    min-height: 44px; /* mínimo táctil */
+  }
+  .sede-foto-mas {
+    right: 0.4rem;
+    bottom: 0.4rem;
+    font-size: 0.7rem;
+    padding: 0.24rem 0.55rem;
+  }
+}
+
+/* Los controles del visor son más grandes con el dedo, y las flechas bajan
+   para no taparse con la propia foto. */
+@media (pointer: coarse) {
+  .visor-cerrar,
+  .visor-nav {
+    width: 3.25rem;
+    height: 3.25rem;
   }
 }

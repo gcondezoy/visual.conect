@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { MapPin, Users, X, CaretLeft, CaretRight, Broadcast } from '@phosphor-icons/react'
 import Reveal from './Reveal.jsx'
@@ -50,6 +50,28 @@ export default function Sedes() {
       document.body.style.overflow = ''
     }
   }, [visor, total])
+
+  // Deslizar para cambiar de foto: en el móvil es el gesto natural; apuntar
+  // a una flecha con el dedo no lo es.
+  const gesto = useRef(null)
+
+  const alTocar = (e) => {
+    const t = e.changedTouches[0]
+    gesto.current = { x: t.clientX, y: t.clientY }
+  }
+
+  const alSoltar = (e) => {
+    if (!gesto.current) return
+    const t = e.changedTouches[0]
+    const dx = t.clientX - gesto.current.x
+    const dy = t.clientY - gesto.current.y
+    gesto.current = null
+    // Solo cuenta si el gesto fue claramente horizontal, para no robarle el
+    // deslizamiento vertical al navegador.
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      setVisor((i) => (i + (dx < 0 ? 1 : -1) + total) % total)
+    }
+  }
 
   return (
     <section id="sedes" className="section sedes">
@@ -152,7 +174,7 @@ export default function Sedes() {
                     />
                     {esUltima && restantes > 0 && (
                       <span className="sede-foto-mas mono" aria-hidden="true">
-                        +{restantes}
+                        +{restantes} fotos
                       </span>
                     )}
                   </button>
@@ -173,6 +195,8 @@ export default function Sedes() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setVisor(null)}
+            onTouchStart={alTocar}
+            onTouchEnd={alSoltar}
             role="dialog"
             aria-modal="true"
             aria-label={`Fotografía de ${grupo.ciudad}`}

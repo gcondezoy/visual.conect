@@ -1,10 +1,7 @@
 .trabaja {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    color-mix(in srgb, var(--bg-elevated) 55%, transparent),
-    transparent
-  );
+  /* Franja de color plano que separa la seccion de sus vecinas. */
+  background: var(--shell);
+  border-block: 1px solid var(--shell-line);
 }
 
 .trabaja__grid {

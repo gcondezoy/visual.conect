@@ -40,14 +40,12 @@
     padding 0.7s var(--ease-fluid);
 }
 
-/* Al bajar, la isla se cierra sobre sí misma y toma cuerpo de cristal. */
+/* Al bajar, la isla se cierra sobre sí misma y toma cuerpo opaco. */
 .nav.is-compacta .nav-isla {
   max-width: calc(var(--maxw) - 90px);
-  background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
+  background: var(--bg-elevated);
   border-color: var(--shell-line);
   box-shadow: var(--ambient);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 .nav-marca {
@@ -83,7 +81,7 @@
 
 .nav-link:hover {
   color: var(--text);
-  background: color-mix(in srgb, var(--text) 6%, transparent);
+  background: var(--shell);
 }
 
 .nav-link[data-activa='true'] {
@@ -137,7 +135,7 @@
   height: 2.5rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--shell-line);
-  background: color-mix(in srgb, var(--text) 5%, transparent);
+  background: var(--shell);
   flex: none;
 }
 
@@ -180,9 +178,7 @@
   justify-content: center;
   gap: 0.3rem;
   padding: 6rem clamp(1.5rem, 8vw, 4rem) 3rem;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(28px) saturate(140%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  background: var(--bg);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -263,6 +259,9 @@
   }
   .nav-hamburguesa {
     display: block;
+    /* Mínimo táctil recomendado (WCAG 2.5.5 / Apple HIG): 44 px. */
+    width: 44px;
+    height: 44px;
   }
   .nav-acciones {
     margin-left: auto;
@@ -272,6 +271,14 @@
   }
   .nav.is-compacta .nav-isla {
     max-width: var(--maxw);
+  }
+
+  /* En móvil la barra es opaca desde el arranque: el contenido pasando por
+     debajo de una barra sin fondo se lee mal y el logo se pierde. */
+  .nav-isla {
+    background: var(--bg-elevated);
+    border-color: var(--shell-line);
+    box-shadow: var(--ambient);
   }
 }
 

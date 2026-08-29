@@ -1,7 +1,18 @@
+/* Marca el final del hero: pasado este punto aparece el flotante. */
+.fab-wa-centinela {
+  position: absolute;
+  top: 600px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
 .fab-wa {
   position: fixed;
   right: clamp(1rem, 3vw, 1.8rem);
-  bottom: clamp(1rem, 3vw, 1.8rem);
+  /* En móvil se apoya sobre el área segura del navegador (barra inferior). */
+  bottom: calc(clamp(1rem, 3vw, 1.8rem) + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   display: grid;
   place-items: center;
@@ -10,7 +21,7 @@
   border-radius: 50%;
   background: #25d366;
   color: #06331a;
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  box-shadow: var(--ambient-lift);
   opacity: 0;
   transform: translateY(20px) scale(0.8);
   pointer-events: none;
