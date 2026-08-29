@@ -4,8 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a1622" />
+    <meta name="theme-color" content="#070d15" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f7fa" media="(prefers-color-scheme: light)" />
     <title>Corporación Visual Connections | Telecomunicaciones a nivel nacional</title>
+
+    <!-- El tema se resuelve antes de pintar para que no haya destello al cargar. -->
+    <script>
+      (function () {
+        try {
+          var g = localStorage.getItem('vc-tema')
+          if (!g) {
+            g = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+          }
+          document.documentElement.dataset.theme = g
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      })()
+    </script>
     <meta
       name="description"
       content="Partner autorizado de WIN y ENTEL. Instalación, averías, traslados y mantenimiento de telecomunicaciones en Lima, Trujillo, Piura y Chiclayo. Únete a nuestro equipo técnico."
@@ -17,7 +33,7 @@
       content="Experiencia, puntualidad, calidad y garantía en servicios de telecomunicaciones a nivel nacional. Partner de WIN y ENTEL."
     />
     <meta property="og:locale" content="es_PE" />
-    <meta property="og:image" content="/img/logo-full.png" />
+    <meta property="og:image" content="/img/logo-full.webp" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

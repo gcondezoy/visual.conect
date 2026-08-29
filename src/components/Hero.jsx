@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
-import { ArrowDown, WhatsappLogo, BroadcastIcon } from '@phosphor-icons/react'
+import { ArrowDown, WhatsappLogo, Broadcast } from '@phosphor-icons/react'
 import { NEGOCIO } from '../config.js'
+import LogoMark from './LogoMark.jsx'
 import './Hero.css'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -23,7 +24,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <BroadcastIcon weight="fill" size={16} />
+            <Broadcast weight="fill" size={16} />
             Partner autorizado de WIN &amp; ENTEL
           </motion.span>
 
@@ -89,7 +90,7 @@ export default function Hero() {
             <span className="signal__ring signal__ring--2" />
             <span className="signal__ring signal__ring--3" />
             <div className="signal__core">
-              <img src="/img/logo-icon.png" alt="" width="140" height="140" />
+              <LogoMark variante="mark" alto={148} />
             </div>
           </div>
 

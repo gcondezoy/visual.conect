@@ -1,3 +1,4 @@
+import FiberOptic from './components/FiberOptic.jsx'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import Metrics from './components/Metrics.jsx'
@@ -13,6 +14,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp.jsx'
 export default function App() {
   return (
     <>
+      <FiberOptic />
       <Navbar />
       <main>
         <Hero />

@@ -1,0 +1,79 @@
+.logomark {
+  position: relative;
+  display: block;
+  width: var(--logo-ancho);
+  height: var(--logo-alto);
+  flex: none;
+}
+
+.logomark-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Las ondas comparten viewBox con la imagen, así caen exactamente sobre las
+   que el propio logo ya trae dibujadas. */
+.logomark-ondas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--cyan);
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Las tres ondas del logo se encienden en secuencia hacia afuera: la señal
+   se lee como algo que sale del emisor, no como un parpadeo. */
+.onda {
+  opacity: 0;
+  animation: onda-transmite 2.4s var(--ease-out-soft) infinite;
+}
+
+@keyframes onda-transmite {
+  0%,
+  55%,
+  100% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.95;
+  }
+  38% {
+    opacity: 0.12;
+  }
+}
+
+/* La cuarta onda se desprende del isotipo y se disuelve en el aire. */
+.onda--emitida {
+  transform-box: view-box;
+  transform-origin: var(--emisor-x) var(--emisor-y);
+  animation: onda-escapa 2.4s var(--ease-out-soft) infinite;
+}
+
+@keyframes onda-escapa {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  16% {
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* Sin movimiento: las ondas quedan encendidas de forma estable. */
+@media (prefers-reduced-motion: reduce) {
+  .onda {
+    opacity: 0.5;
+    animation: none;
+  }
+  .onda--emitida {
+    opacity: 0;
+  }
+}

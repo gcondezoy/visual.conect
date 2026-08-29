@@ -14,7 +14,7 @@ export const VISION =
 export const VALORES = [
   { nombre: 'Trabajo en equipo', icono: 'UsersThree' },
   { nombre: 'Profesionalismo', icono: 'Medal' },
-  { nombre: 'Compromiso', icono: 'HandshakeIcon' },
+  { nombre: 'Compromiso', icono: 'Handshake' },
   { nombre: 'Ética', icono: 'Scales' },
   { nombre: 'Respeto', icono: 'Heart' },
   { nombre: 'Confiabilidad', icono: 'ShieldCheck' },
@@ -85,11 +85,12 @@ export const PROPUESTA_LABORAL = {
   contrato: 'Planilla — Régimen MYPE (BBSS 50%)',
   jornada:
     'Disponibilidad para trabajar feriados y domingos, con descansos rotativos (se alternan domingos).',
-  salarios: [
-    { cargo: 'Técnico Principal con licencia', monto: 'S/ 1,800' },
-    { cargo: 'Técnico Principal sin licencia', monto: 'S/ 1,700' },
-    { cargo: 'Aux. de Técnico con licencia', monto: 'S/ 1,600' },
-    { cargo: 'Aux. de Técnico sin licencia', monto: 'S/ 1,500' },
+  // La remuneración se conversa en la entrevista, no se publica en la web.
+  beneficios: [
+    'Ingreso a planilla desde el primer día',
+    'Capacitación y certificación con WIN y ENTEL',
+    'Equipo, uniforme y herramientas a cargo de la empresa',
+    'Línea de crecimiento a Técnico Principal',
   ],
   requisitos: [
     'Experiencia en telecomunicaciones (deseable)',

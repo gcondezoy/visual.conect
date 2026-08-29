@@ -1,0 +1,12 @@
+/* Malla de fibra: capa fija por detrás del contenido.
+   No recibe eventos y no participa del flujo, así el scroll no la repinta. */
+.fiber-optic {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: var(--fiber-opacity);
+  transition: opacity 0.5s var(--ease-fluid);
+}

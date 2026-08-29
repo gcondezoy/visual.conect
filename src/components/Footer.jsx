@@ -9,6 +9,7 @@ import {
 } from '@phosphor-icons/react'
 import { NEGOCIO } from '../config.js'
 import { buildWhatsAppLink } from '../whatsapp.js'
+import LogoMark from './LogoMark.jsx'
 import './Footer.css'
 
 const REDES = [
@@ -47,7 +48,12 @@ export default function Footer() {
 
       <div className="container footer__main">
         <div className="footer__brand">
-          <img src="/img/logo-full.png" alt="Corporación Visual Connections" className="footer__logo" />
+          <LogoMark
+            variante="lockup"
+            alto={52}
+            className="footer__logo"
+            alt="Corporación Visual Connections"
+          />
           <p>
             Servicios de telecomunicaciones a nivel nacional. Partner autorizado de WIN y
             ENTEL desde {NEGOCIO.fundacion}.

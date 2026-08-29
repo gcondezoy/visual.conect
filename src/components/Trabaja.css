@@ -1,5 +1,10 @@
 .trabaja {
-  background: linear-gradient(180deg, transparent, rgba(12, 30, 46, 0.5), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--bg-elevated) 55%, transparent),
+    transparent
+  );
 }
 
 .trabaja__grid {
@@ -49,8 +54,8 @@
   padding: 1.5rem;
   background: linear-gradient(
     130deg,
-    rgba(247, 145, 30, 0.1),
-    rgba(18, 40, 59, 0.5)
+    color-mix(in srgb, var(--accent) 11%, var(--core)),
+    var(--core)
   );
   border: 1px solid var(--accent-soft);
   border-radius: var(--r-md);

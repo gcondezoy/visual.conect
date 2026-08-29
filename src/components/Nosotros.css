@@ -59,8 +59,8 @@
   padding: 2.2rem;
   background: linear-gradient(
     130deg,
-    rgba(18, 40, 59, 0.8),
-    rgba(23, 50, 74, 0.5)
+    var(--core),
+    color-mix(in srgb, var(--cyan) 6%, var(--core))
   );
   border: 1px solid var(--border);
   border-radius: var(--r-lg);

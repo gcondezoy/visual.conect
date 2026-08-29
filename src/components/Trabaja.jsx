@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { WhatsappLogo, CheckCircle, Briefcase } from '@phosphor-icons/react'
+import { WhatsappLogo, CheckCircle, Briefcase, Sparkle } from '@phosphor-icons/react'
 import Reveal from './Reveal.jsx'
 import { PROPUESTA_LABORAL } from '../data.js'
 import { AREAS_POSTULACION, NEGOCIO } from '../config.js'
@@ -87,28 +87,30 @@ export default function Trabaja() {
             </div>
           </div>
 
-          <div className="trabaja__salarios">
-            <h3>Salario base</h3>
-            <ul>
-              {PROPUESTA_LABORAL.salarios.map((s) => (
-                <li key={s.cargo}>
-                  <span>{s.cargo}</span>
-                  <strong className="mono">{s.monto}</strong>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="trabaja__listas">
+            <div className="trabaja__reqs">
+              <h3>Qué ofrecemos</h3>
+              <ul>
+                {PROPUESTA_LABORAL.beneficios.map((b) => (
+                  <li key={b}>
+                    <Sparkle weight="fill" size={15} />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="trabaja__reqs">
-            <h3>Requisitos</h3>
-            <ul>
-              {PROPUESTA_LABORAL.requisitos.map((r) => (
-                <li key={r}>
-                  <CheckCircle weight="fill" size={16} />
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <div className="trabaja__reqs">
+              <h3>Requisitos</h3>
+              <ul>
+                {PROPUESTA_LABORAL.requisitos.map((r) => (
+                  <li key={r}>
+                    <CheckCircle weight="fill" size={15} />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <p className="trabaja__jornada">

@@ -1,5 +1,10 @@
 .socios {
-  background: linear-gradient(180deg, transparent, rgba(12, 30, 46, 0.5), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--bg-elevated) 55%, transparent),
+    transparent
+  );
 }
 
 .socios__head {

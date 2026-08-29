@@ -1,6 +1,6 @@
-import * as Icons from '@phosphor-icons/react'
 import Reveal from './Reveal.jsx'
 import { SERVICIOS } from '../data.js'
+import { icono } from '../iconos.js'
 import './Servicios.css'
 
 export default function Servicios() {
@@ -20,7 +20,7 @@ export default function Servicios() {
 
         <div className="servicios__grid">
           {SERVICIOS.map((s, i) => {
-            const Icon = Icons[s.icono] || Icons.Wrench
+            const Icon = icono(s.icono, 'Wrench')
             return (
               <Reveal
                 as="article"

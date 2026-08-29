@@ -1,5 +1,5 @@
-import * as Icons from '@phosphor-icons/react'
 import { Target, Eye } from '@phosphor-icons/react'
+import { icono } from '../iconos.js'
 import Reveal from './Reveal.jsx'
 import { EMPRESA_DESCRIPCION, MISION, VISION, VALORES } from '../data.js'
 import './Nosotros.css'
@@ -38,7 +38,7 @@ export default function Nosotros() {
           <h3 className="valores__title">Nuestros valores corporativos</h3>
           <ul className="valores__list">
             {VALORES.map((v, i) => {
-              const Icon = Icons[v.icono] || Icons.CheckCircle
+              const Icon = icono(v.icono)
               return (
                 <Reveal as="li" key={v.nombre} className="valor" delay={i * 0.06} direction="up">
                   <Icon weight="duotone" size={22} />
