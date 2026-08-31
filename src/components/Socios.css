@@ -1,134 +1,120 @@
 .socios {
-  /* Franja de color plano que separa la seccion de sus vecinas. */
+  /* Franja de color plano que separa la sección de sus vecinas. */
   background: var(--shell);
   border-block: 1px solid var(--shell-line);
 }
 
 .socios__head {
   max-width: 60ch;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
-.socios__grid {
+/* ------------------------------------------------- Fila de marcas ---- */
+/* Cuatro columnas iguales: las marcas se leen de un vistazo, que es lo que
+   se espera de un respaldo. Con solo cuatro no hace falta un carrusel, y
+   esconderlas tras una interacción restaría en vez de sumar. */
+.marcas {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
-.socio {
-  position: relative;
+.marca {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  padding: 2rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 132px;
+  padding: 1.5rem 1rem;
+  background: var(--core);
+  border: 1px solid var(--core-line);
   border-radius: var(--r-lg);
-  overflow: hidden;
   transition:
-    transform 0.28s ease,
-    border-color 0.28s ease,
-    box-shadow 0.28s ease;
-}
-.socio:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-md);
+    transform 0.6s var(--ease-fluid),
+    border-color 0.5s var(--ease-fluid),
+    box-shadow 0.6s var(--ease-fluid);
 }
 
-.socio__top {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
+/* Al pasar el cursor, el filete toma el color de la propia marca. */
+.marca:hover {
+  transform: translateY(-4px);
+  border-color: var(--marca);
+  box-shadow: var(--ambient-lift);
 }
 
-.socio__logo {
+.marca__logo {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: 2.6rem;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
   line-height: 1;
   letter-spacing: -0.03em;
+  color: var(--marca);
+  text-align: center;
 }
 
-.socio__tag {
-  font-size: 0.85rem;
+.marca__estado {
+  font-size: 0.68rem;
   font-weight: 600;
-  color: var(--text-soft);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--muted);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--r-pill);
+  background: var(--shell);
+  border: 1px solid var(--shell-line);
 }
 
-.socio__desc {
-  color: var(--text-soft);
-  font-size: 0.98rem;
-  line-height: 1.65;
+/* La alianza vigente se distingue por el color del estado, no por el
+   tamaño de la marca: todas pesan lo mismo. */
+.marca__estado[data-vigente='true'] {
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
 }
 
-.socio__bar {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 4px;
-  width: 0;
-  transition: width 0.4s ease;
-}
-.socio:hover .socio__bar {
-  width: 100%;
-}
-
-@media (max-width: 720px) {
-  .socios__grid {
-    grid-template-columns: 1fr;
-  }
-  .socio__logo {
-    font-size: 2.1rem;
-  }
-}
-
-/* --- Trayectoria: operadoras con las que ya se trabajó --- */
-.socios__previas {
+/* ------------------------------------------------------- Detalle ---- */
+.socios__detalle {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 2.5rem;
   margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--shell-line);
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
 }
 
-.socios__previas-label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.socios__previas-lista {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  flex-wrap: wrap;
-}
-
-/* Se muestran con menos peso que WIN y ENTEL: son trabajos anteriores,
-   no alianzas vigentes. */
-.socios__previas-lista li {
-  font-family: var(--font-head);
+.socios__detalle-item h3 {
+  font-size: 1rem;
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-  color: var(--marca);
-  padding: 0.42rem 1rem;
-  border: 1px solid var(--shell-line);
-  border-radius: var(--r-pill);
-  background: var(--shell);
+  margin-bottom: 0.5rem;
+  color: var(--text);
 }
 
-@media (max-width: 620px) {
-  .socios__previas {
-    gap: 0.9rem;
+.socios__detalle-item p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------- Móvil ---- */
+@media (max-width: 860px) {
+  .marcas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .socios__detalle {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .marca {
+    min-height: 112px;
+    padding: 1.1rem 0.7rem;
+  }
+  .marca__estado {
+    font-size: 0.6rem;
+    letter-spacing: 0.07em;
   }
 }

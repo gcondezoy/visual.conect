@@ -1,7 +1,20 @@
 import Reveal from './Reveal.jsx'
-import { SOCIOS, OPERADORAS_PREVIAS } from '../data.js'
+import { MARCAS, SOCIOS } from '../data.js'
 import './Socios.css'
 
+/**
+ * Respaldo de marca.
+ *
+ * Las cuatro operadoras van en una sola fila y al mismo peso visual: antes
+ * WIN y ENTEL ocupaban tarjetas grandes con párrafo y Claro y DIRECTV
+ * quedaban como dos pastillas sueltas bajo un "también hemos trabajado con",
+ * lo que las hacía parecer de segunda categoría. Cada marca lleva su propio
+ * estado, así la distinción entre alianza vigente y trabajo anterior se
+ * mantiene sin relegar a nadie.
+ *
+ * El detalle de las alianzas vigentes queda debajo, en texto, para que no
+ * compita con la lectura rápida de los logos.
+ */
 export default function Socios() {
   return (
     <section className="section socios">
@@ -17,31 +30,34 @@ export default function Socios() {
           </p>
         </Reveal>
 
-        <div className="socios__grid">
-          {SOCIOS.map((s, i) => (
-            <Reveal key={s.nombre} className="socio" direction="up" delay={i * 0.12}>
-              <div className="socio__top">
-                <span className="socio__logo" style={{ color: s.color }}>
-                  {s.nombre.toLowerCase()}
-                </span>
-                <span className="socio__tag">{s.tagline}</span>
-              </div>
-              <p className="socio__desc">{s.descripcion}</p>
-              <div className="socio__bar" style={{ background: s.color }} />
+        {/* Fila de marcas */}
+        <div className="marcas">
+          {MARCAS.map((m, i) => (
+            <Reveal
+              key={m.nombre}
+              className="marca"
+              direction="up"
+              delay={i * 0.08}
+              style={{ '--marca': m.color }}
+            >
+              <span className="marca__logo">{m.logotipo}</span>
+              <span className="marca__estado" data-vigente={m.vigente}>
+                {m.vigente ? 'Partner autorizado' : 'Trabajo realizado'}
+              </span>
             </Reveal>
           ))}
         </div>
 
-        {/* Trayectoria: operadoras con las que ya se trabajó. */}
-        <Reveal className="socios__previas" delay={0.2}>
-          <span className="socios__previas-label">También hemos trabajado con</span>
-          <ul className="socios__previas-lista">
-            {OPERADORAS_PREVIAS.map((o) => (
-              <li key={o.nombre} style={{ '--marca': o.color }}>
-                {o.nombre}
-              </li>
-            ))}
-          </ul>
+        {/* Detalle de las alianzas vigentes */}
+        <Reveal className="socios__detalle" delay={0.24}>
+          {SOCIOS.map((s) => (
+            <div key={s.nombre} className="socios__detalle-item">
+              <h3>
+                <span style={{ color: s.color }}>{s.nombre}</span> — {s.tagline}
+              </h3>
+              <p>{s.descripcion}</p>
+            </div>
+          ))}
         </Reveal>
       </div>
     </section>

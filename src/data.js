@@ -26,6 +26,7 @@ export const VALORES = [
 export const SOCIOS = [
   {
     nombre: 'WIN',
+    logotipo: 'win',
     tagline: 'Internet 100% Fibra Óptica',
     descripcion:
       'Empresa líder a nivel nacional en brindar el servicio de internet por fibra óptica. Corporación Visual Connections forma parte del staff de partners que realizan las tareas de instalación y visitas técnicas a los clientes finales.',
@@ -33,6 +34,7 @@ export const SOCIOS = [
   },
   {
     nombre: 'ENTEL',
+    logotipo: 'entel',
     tagline: 'Conectividad Móvil y Fija',
     descripcion:
       'Empresa de servicios de conectividad móvil y fija: internet por fibra óptica, internet inalámbrico, líneas móviles y equipos telefónicos. Somos parte del staff que realiza las tareas de venta de servicios de fibra óptica.',
@@ -43,8 +45,17 @@ export const SOCIOS = [
 // --- Operadoras con las que ya se ha trabajado ---
 // Respaldan la trayectoria: son trabajos anteriores, no alianzas vigentes.
 export const OPERADORAS_PREVIAS = [
-  { nombre: 'Claro', color: '#DA291C' },
-  { nombre: 'DIRECTV', color: '#00A0DF' },
+  { nombre: 'Claro', logotipo: 'claro', color: '#DA291C' },
+  // DIRECTV va en versales; el resto de marcas usa minúsculas.
+  { nombre: 'DIRECTV', logotipo: 'DIRECTV', color: '#00A0DF' },
+]
+
+// Las cuatro marcas en una sola lista, al mismo nivel visual. `vigente`
+// distingue la alianza actual del trabajo ya realizado, sin relegar a nadie
+// a un renglón secundario.
+export const MARCAS = [
+  ...SOCIOS.map((s) => ({ ...s, vigente: true })),
+  ...OPERADORAS_PREVIAS.map((o) => ({ ...o, vigente: false })),
 ]
 
 // --- Servicios principales ---
