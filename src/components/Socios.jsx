@@ -1,19 +1,21 @@
 import Reveal from './Reveal.jsx'
-import { MARCAS, SOCIOS } from '../data.js'
+import { SOCIOS, OPERADORAS_PREVIAS } from '../data.js'
 import './Socios.css'
 
+// Dos grupos, una etiqueta cada uno. Mostrar las cuatro marcas sin ninguna
+// distinción daría a entender que las cuatro son alianzas vigentes; con una
+// sola etiqueta por grupo queda claro sin llenar la sección de texto.
+const GRUPOS = [
+  { titulo: 'Partners autorizados', marcas: SOCIOS },
+  { titulo: 'También hemos trabajado con', marcas: OPERADORAS_PREVIAS },
+]
+
 /**
- * Respaldo de marca.
+ * Respaldo de marca: un muro de logotipos.
  *
- * Las cuatro operadoras van en una sola fila y al mismo peso visual: antes
- * WIN y ENTEL ocupaban tarjetas grandes con párrafo y Claro y DIRECTV
- * quedaban como dos pastillas sueltas bajo un "también hemos trabajado con",
- * lo que las hacía parecer de segunda categoría. Cada marca lleva su propio
- * estado, así la distinción entre alianza vigente y trabajo anterior se
- * mantiene sin relegar a nadie.
- *
- * El detalle de las alianzas vigentes queda debajo, en texto, para que no
- * compita con la lectura rápida de los logos.
+ * Se dejan solo las marcas. Las descripciones de WIN y ENTEL repetían lo que
+ * ya dice el texto de entrada, y un respaldo se lee de un vistazo: cuanto
+ * menos haya alrededor del logotipo, más rápido cumple su función.
  */
 export default function Socios() {
   return (
@@ -30,35 +32,20 @@ export default function Socios() {
           </p>
         </Reveal>
 
-        {/* Fila de marcas */}
         <div className="marcas">
-          {MARCAS.map((m, i) => (
-            <Reveal
-              key={m.nombre}
-              className="marca"
-              direction="up"
-              delay={i * 0.08}
-              style={{ '--marca': m.color }}
-            >
-              <span className="marca__logo">{m.logotipo}</span>
-              <span className="marca__estado" data-vigente={m.vigente}>
-                {m.vigente ? 'Partner autorizado' : 'Trabajo realizado'}
-              </span>
+          {GRUPOS.map((g, gi) => (
+            <Reveal key={g.titulo} className="marcas__grupo" delay={gi * 0.12}>
+              <span className="marcas__titulo">{g.titulo}</span>
+              <ul className="marcas__lista">
+                {g.marcas.map((m) => (
+                  <li key={m.nombre} className="marca" style={{ '--marca': m.color }}>
+                    <span className="marca__logo">{m.logotipo}</span>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           ))}
         </div>
-
-        {/* Detalle de las alianzas vigentes */}
-        <Reveal className="socios__detalle" delay={0.24}>
-          {SOCIOS.map((s) => (
-            <div key={s.nombre} className="socios__detalle-item">
-              <h3>
-                <span style={{ color: s.color }}>{s.nombre}</span> — {s.tagline}
-              </h3>
-              <p>{s.descripcion}</p>
-            </div>
-          ))}
-        </Reveal>
       </div>
     </section>
   )
