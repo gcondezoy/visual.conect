@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { MapPin, Users, X, CaretLeft, CaretRight, Broadcast } from '@phosphor-icons/react'
+import { MapPin, X, CaretLeft, CaretRight, Broadcast } from '@phosphor-icons/react'
 import Reveal from './Reveal.jsx'
-import { SEDES } from '../config.js'
+import MapaPeru from './MapaPeru.jsx'
+import { SEDES, CUADRILLAS_NACIONAL } from '../config.js'
 import { GALERIA } from '../galeria.js'
 import './Sedes.css'
 
-// A las cuatro sedes se suma el equipo comercial, que opera transversalmente.
+// A las cuatro sedes se suma el equipo comercial, que opera transversalmente
+// y por eso no tiene punto en el mapa.
 const GRUPOS = [
   ...SEDES.map((s) => ({ ...s, fotos: GALERIA[s.id] ?? [] })),
   {
@@ -14,7 +16,6 @@ const GRUPOS = [
     ciudad: 'Equipo Comercial',
     etiqueta: 'Fuerza de ventas',
     direccion: 'Fuerza de ventas certificada — WIN & ENTEL',
-    cuadrillasTexto: 'FFVV',
     servicios: 'Asesoría, contratación y venta de servicios de fibra óptica',
     fotos: GALERIA.comercial ?? [],
   },
@@ -101,8 +102,8 @@ export default function Sedes() {
             Nuestros <span className="text-accent">equipos</span> en campo
           </h2>
           <p className="section-lead">
-            Cuadrillas técnicas operando en cuatro ciudades del país, atendiendo averías,
-            instalaciones, traslados y ordenamiento de red.
+            {CUADRILLAS_NACIONAL} cuadrillas técnicas a nivel nacional, operando en cuatro
+            ciudades del país entre averías, instalaciones, traslados y ordenamiento de red.
           </p>
         </Reveal>
 
@@ -117,55 +118,60 @@ export default function Sedes() {
                 data-activa={g.id === activa}
                 onClick={() => setActiva(g.id)}
               >
-                <span>{g.ciudad}</span>
-                <span className="sede-tab-badge mono">{g.cuadrillasTexto}</span>
+                {g.ciudad}
               </button>
             ))}
           </div>
         </Reveal>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activa}
-            className="sede-panel"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.45, ease }}
-          >
-            {/* Ficha de la sede */}
-            <aside className="bezel sede-ficha">
-              <div className="core">
-                <span
-                  className="sede-chip"
-                  data-principal={grupo.etiqueta === 'Sede Principal'}
-                >
-                  {grupo.etiqueta}
-                </span>
-                <h3 className="sede-ciudad">{grupo.ciudad}</h3>
+        <div className="sede-panel">
+          {/* Columna izquierda: el mapa se mantiene fijo entre sedes (solo
+              cambia el punto activo); la ficha sí se renueva. */}
+          <aside className="sede-lateral">
+            <MapaPeru sedes={SEDES} activa={activa} onSeleccionar={setActiva} />
 
-                <ul className="sede-datos">
-                  <li>
-                    <Users weight="light" size={17} />
-                    <span>{grupo.cuadrillasTexto}</span>
-                  </li>
-                  <li>
-                    <MapPin weight="light" size={17} />
-                    <span>{grupo.direccion}</span>
-                  </li>
-                </ul>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activa}
+                className="bezel sede-ficha"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4, ease }}
+              >
+                <div className="core">
+                  <span
+                    className="sede-chip"
+                    data-principal={grupo.etiqueta === 'Sede Principal'}
+                  >
+                    {grupo.etiqueta}
+                  </span>
+                  <h3 className="sede-ciudad">{grupo.ciudad}</h3>
 
-                <p className="sede-servicios">{grupo.servicios}.</p>
+                  <ul className="sede-datos">
+                    <li>
+                      <MapPin weight="light" size={17} />
+                      <span>{grupo.direccion}</span>
+                    </li>
+                  </ul>
 
-                <span className="sede-conteo mono">
-                  {fotos.length} {fotos.length === 1 ? 'fotografía' : 'fotografías'}
-                </span>
-              </div>
-            </aside>
+                  <p className="sede-servicios">{grupo.servicios}.</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </aside>
 
-            {/* Mosaico en columnas: cada foto conserva su proporción real y la
-                rejilla se acomoda a ella, sin recortes ni marcos vacíos. */}
-            <div className="sede-mosaico">
+          {/* Mosaico en columnas: cada foto conserva su proporción real y la
+              rejilla se acomoda a ella, sin recortes ni marcos vacíos. */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activa}
+              className="sede-mosaico"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.45, ease }}
+            >
               {visibles.map((foto, i) => {
                 const esUltima = i === visibles.length - 1
                 const restantes = fotos.length - visibles.length
@@ -189,16 +195,16 @@ export default function Sedes() {
                       height={foto.alto}
                     />
                     {esUltima && restantes > 0 && (
-                      <span className="sede-foto-mas mono" aria-hidden="true">
+                      <span className="sede-foto-mas" aria-hidden="true">
                         +{restantes} fotos
                       </span>
                     )}
                   </button>
                 )
               })}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Visor a pantalla completa */}

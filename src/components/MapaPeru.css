@@ -1,0 +1,98 @@
+.mapa {
+  padding: 1.2rem;
+  background: var(--core);
+  border: 1px solid var(--core-line);
+  border-radius: var(--r-lg);
+}
+
+.mapa-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* El país en color plano, con su filete. */
+.mapa-pais {
+  fill: var(--shell);
+  stroke: var(--shell-line);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------- Sedes ---- */
+.mapa-punto {
+  cursor: pointer;
+}
+
+.mapa-toque {
+  fill: transparent;
+}
+
+.mapa-pin {
+  fill: var(--muted);
+  transition:
+    fill 0.45s var(--ease-fluid),
+    r 0.45s var(--ease-spring);
+}
+
+.mapa-punto:hover .mapa-pin {
+  fill: var(--cyan);
+  r: 8;
+}
+
+.mapa-punto[data-activa='true'] .mapa-pin {
+  fill: var(--accent);
+  r: 8;
+}
+
+/* Anillo de la sede en curso: late para localizarla de un vistazo. */
+.mapa-halo {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mapa-latido 2.4s var(--ease-out-soft) infinite;
+}
+
+@keyframes mapa-latido {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.7);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.mapa-etiqueta {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--text-soft);
+  transition: fill 0.45s var(--ease-fluid);
+  pointer-events: none;
+}
+
+.mapa-punto[data-activa='true'] .mapa-etiqueta {
+  fill: var(--text);
+}
+
+.mapa-punto:focus-visible {
+  outline: none;
+}
+.mapa-punto:focus-visible .mapa-pin {
+  fill: var(--cyan);
+  stroke: var(--cyan);
+  stroke-width: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapa-halo {
+    animation: none;
+    opacity: 0.6;
+  }
+}

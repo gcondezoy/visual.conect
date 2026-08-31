@@ -3,7 +3,7 @@
 // ============================================================
 
 export const EMPRESA_DESCRIPCION =
-  'Creada en 2021 con la finalidad de cubrir las necesidades del mercado en cuanto a experiencia, puntualidad, calidad y garantía respecto a trabajos de instalación y mantenimiento y/o averías de clientes hogar y empresas que requieran los servicios de internet, cable y telefonía a nivel nacional.'
+  'Con experiencia desde 2017 en el rubro, cubrimos las necesidades del mercado en cuanto a experiencia, puntualidad, calidad y garantía respecto a trabajos de instalación y mantenimiento y/o averías de clientes hogar y empresas que requieran los servicios de internet, cable y telefonía a nivel nacional.'
 
 export const MISION =
   'La satisfacción de nuestros clientes de recibir un servicio de calidad, así como un trato cordial por parte de nuestros colaboradores. Toda asignación deberá ser atendida siempre con los más altos estándares y cumpliendo con los parámetros que nuestros socios establezcan.'
@@ -36,6 +36,13 @@ export const SOCIOS = [
       'Empresa de servicios de conectividad móvil y fija: internet por fibra óptica, internet inalámbrico, líneas móviles y equipos telefónicos. Somos parte del staff que realiza las tareas de venta de servicios de fibra óptica.',
     color: '#0099DD',
   },
+]
+
+// --- Operadoras con las que ya se ha trabajado ---
+// Respaldan la trayectoria: son trabajos anteriores, no alianzas vigentes.
+export const OPERADORAS_PREVIAS = [
+  { nombre: 'Claro', color: '#DA291C' },
+  { nombre: 'DIRECTV', color: '#00A0DF' },
 ]
 
 // --- Servicios principales ---
@@ -72,9 +79,10 @@ export const SERVICIOS = [
 
 // --- Métricas / números clave ---
 export const METRICAS = [
-  { valor: 65, sufijo: '+', etiqueta: 'Cuadrillas técnicas' },
+  // Promedio nacional: la cifra exacta cambia cada semana.
+  { valor: 50, sufijo: '+', etiqueta: 'Cuadrillas a nivel nacional' },
   { valor: 4, sufijo: '', etiqueta: 'Sedes a nivel nacional' },
-  { valor: 2021, sufijo: '', etiqueta: 'Año de fundación', plano: true },
+  { valor: 2017, sufijo: '', etiqueta: 'Experiencia desde', plano: true },
   { valor: 100, sufijo: '%', etiqueta: 'Compromiso y calidad' },
 ]
 

@@ -41,31 +41,18 @@
   box-shadow: var(--ambient);
 }
 
-.sede-tab-badge {
-  font-size: 0.66rem;
-  letter-spacing: 0.06em;
-  padding: 0.16rem 0.5rem;
-  border-radius: var(--r-pill);
-  background: var(--sobre-oscuro);
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.sede-tab[data-activa='true'] .sede-tab-badge {
-  background: #d97d10;
-  color: #2b1a03;
-}
-
 /* ------------------------------------------------------------ Panel ---- */
 .sede-panel {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 330px 1fr;
   gap: 1.25rem;
   align-items: start;
 }
 
-/* Ficha ---------------------------------------------------------------- */
-.sede-ficha {
+/* Columna del mapa y la ficha */
+.sede-lateral {
+  display: grid;
+  gap: 1rem;
   position: sticky;
   top: calc(var(--nav-h) + 24px);
 }
@@ -76,7 +63,7 @@
 
 .sede-chip {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.63rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -125,15 +112,6 @@
   color: var(--muted);
   padding-top: 1.15rem;
   border-top: 1px solid var(--core-line);
-}
-
-.sede-conteo {
-  display: block;
-  margin-top: 1rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
 }
 
 /* Mosaico -------------------------------------------------------------- */
@@ -288,8 +266,15 @@
   .sede-panel {
     grid-template-columns: 1fr;
   }
-  .sede-ficha {
+  .sede-lateral {
     position: static;
+  }
+  /* A una sola columna el mapa se comería la pantalla: se limita el ancho
+     y se centra, que la silueta del país es alta y estrecha. */
+  .sede-lateral .mapa {
+    max-width: 300px;
+    margin-inline: auto;
+    width: 100%;
   }
   .sede-mosaico {
     column-count: 2;

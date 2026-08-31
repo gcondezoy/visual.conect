@@ -24,7 +24,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease }}
           >
             <Broadcast weight="fill" size={16} />
-            Partner autorizado de WIN &amp; ENTEL
+            Partner autorizado
           </motion.span>
 
           <motion.h1
@@ -44,7 +44,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.16, ease }}
           >
-            Somos Corporación Visual Connections. Desde 2021 brindamos servicios de
+            Somos Corporación Visual Connections. Con experiencia desde 2017 brindamos
             instalación, averías, traslados y mantenimiento de telecomunicaciones para
             clientes hogar y empresas a nivel nacional.
           </motion.p>
@@ -70,7 +70,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.32, ease }}
           >
             <div className="hero__stat">
-              <strong className="mono">+65</strong>
+              <strong className="mono">+50</strong>
               <span>cuadrillas técnicas</span>
             </div>
             <div className="hero__stat">
@@ -78,8 +78,8 @@ export default function Hero() {
               <span>sedes a nivel nacional</span>
             </div>
             <div className="hero__stat">
-              <strong className="mono">2021</strong>
-              <span>operando en el país</span>
+              <strong className="mono">2017</strong>
+              <span>de experiencia en el rubro</span>
             </div>
           </motion.div>
 

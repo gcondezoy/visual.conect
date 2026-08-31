@@ -30,22 +30,19 @@
   max-width: var(--maxw);
   padding: 0.5rem 0.5rem 0.5rem 1.15rem;
   border-radius: var(--r-pill);
-  border: 1px solid transparent;
-  background: transparent;
+  /* Color entero desde el arranque: antes era transparente arriba y el
+     contenido se leía por debajo de la barra. */
+  border: 1px solid var(--shell-line);
+  background: var(--bg-elevated);
+  box-shadow: var(--ambient);
   transition:
-    background 0.7s var(--ease-fluid),
-    border-color 0.7s var(--ease-fluid),
-    box-shadow 0.7s var(--ease-fluid),
     max-width 0.7s var(--ease-fluid),
     padding 0.7s var(--ease-fluid);
 }
 
-/* Al bajar, la isla se cierra sobre sí misma y toma cuerpo opaco. */
+/* Al bajar, la isla se cierra un poco sobre sí misma. */
 .nav.is-compacta .nav-isla {
   max-width: calc(var(--maxw) - 90px);
-  background: var(--bg-elevated);
-  border-color: var(--shell-line);
-  box-shadow: var(--ambient);
 }
 
 .nav-marca {

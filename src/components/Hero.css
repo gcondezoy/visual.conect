@@ -15,15 +15,10 @@
   pointer-events: none;
 }
 
+/* La retícula de cuadros se retira: el cliente pidió el fondo de un color
+   entero, sin cuadritos. */
 .hero__grid {
-  position: absolute;
-  inset: -2px;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 54px 54px;
-  mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 40%, transparent 100%);
+  display: none;
 }
 
 /* Los dos orbes difusos de color se retiran: eran manchas translúcidas y el
@@ -46,7 +41,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;

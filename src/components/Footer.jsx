@@ -19,7 +19,7 @@ const REDES = [
 ]
 
 export default function Footer() {
-  const anio = 2021
+  const anio = 2017
   const redesActivas = REDES.filter((r) => NEGOCIO.redes[r.key])
 
   return (

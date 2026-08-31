@@ -1,5 +1,5 @@
 import Reveal from './Reveal.jsx'
-import { SOCIOS } from '../data.js'
+import { SOCIOS, OPERADORAS_PREVIAS } from '../data.js'
 import './Socios.css'
 
 export default function Socios() {
@@ -31,6 +31,18 @@ export default function Socios() {
             </Reveal>
           ))}
         </div>
+
+        {/* Trayectoria: operadoras con las que ya se trabajó. */}
+        <Reveal className="socios__previas" delay={0.2}>
+          <span className="socios__previas-label">También hemos trabajado con</span>
+          <ul className="socios__previas-lista">
+            {OPERADORAS_PREVIAS.map((o) => (
+              <li key={o.nombre} style={{ '--marca': o.color }}>
+                {o.nombre}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   )
