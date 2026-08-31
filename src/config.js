@@ -7,6 +7,7 @@ export const NEGOCIO = {
   nombreCorto: 'Visual Connections',
   // Inicio de actividades según ficha RUC (19/09/2017).
   fundacion: 2017,
+  fundacionFecha: '2017-09-19',
 
   // --- Contacto ---
   // WhatsApp en formato internacional SIN el signo "+" ni espacios
@@ -90,3 +91,16 @@ export const AREAS_POSTULACION = [
   'Administración',
   'Otro',
 ]
+
+// Años cumplidos de experiencia, calculados desde el inicio de actividades.
+// Así la cifra sigue siendo correcta con el paso del tiempo, en vez de
+// quedar escrita a mano y envejecer.
+export function aniosDeExperiencia(hoy = new Date()) {
+  const inicio = new Date(NEGOCIO.fundacionFecha)
+  let anios = hoy.getFullYear() - inicio.getFullYear()
+  const yaCumplio =
+    hoy.getMonth() > inicio.getMonth() ||
+    (hoy.getMonth() === inicio.getMonth() && hoy.getDate() >= inicio.getDate())
+  if (!yaCumplio) anios -= 1
+  return anios
+}

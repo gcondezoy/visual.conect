@@ -2,6 +2,8 @@
 //  CONTENIDO DE LA LANDING — textos, servicios, valores, etc.
 // ============================================================
 
+import { aniosDeExperiencia } from './config.js'
+
 export const EMPRESA_DESCRIPCION =
   'Con experiencia desde 2017 en el rubro, cubrimos las necesidades del mercado en cuanto a experiencia, puntualidad, calidad y garantía respecto a trabajos de instalación y mantenimiento y/o averías de clientes hogar y empresas que requieran los servicios de internet, cable y telefonía a nivel nacional.'
 
@@ -82,7 +84,9 @@ export const METRICAS = [
   // Promedio nacional: la cifra exacta cambia cada semana.
   { valor: 50, sufijo: '+', etiqueta: 'Cuadrillas a nivel nacional' },
   { valor: 4, sufijo: '', etiqueta: 'Sedes a nivel nacional' },
-  { valor: 2017, sufijo: '', etiqueta: 'Experiencia desde', plano: true },
+  // Se cuentan los años en vez de mostrar el año suelto: "2017" junto a una
+  // etiqueta no termina de leerse como una frase.
+  { valor: aniosDeExperiencia(), sufijo: '+', etiqueta: 'Años de experiencia' },
   { valor: 100, sufijo: '%', etiqueta: 'Compromiso y calidad' },
 ]
 

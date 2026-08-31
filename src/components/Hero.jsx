@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ArrowDown, WhatsappLogo, Broadcast } from '@phosphor-icons/react'
-import { NEGOCIO } from '../config.js'
+import { NEGOCIO, aniosDeExperiencia } from '../config.js'
 import './Hero.css'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -78,8 +78,8 @@ export default function Hero() {
               <span>sedes a nivel nacional</span>
             </div>
             <div className="hero__stat">
-              <strong className="mono">2017</strong>
-              <span>de experiencia en el rubro</span>
+              <strong className="mono">+{aniosDeExperiencia()}</strong>
+              <span>años de experiencia</span>
             </div>
           </motion.div>
 

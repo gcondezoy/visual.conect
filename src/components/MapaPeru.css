@@ -10,6 +10,10 @@
   height: auto;
   display: block;
   overflow: visible;
+  /* Sin esto, al pulsar un punto se selecciona el nombre de la ciudad y
+     queda resaltado como si fuera texto de un párrafo. */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* El país en color plano, con su filete. */
