@@ -1,5 +1,5 @@
 .mapa {
-  padding: 1.2rem;
+  padding: 1.4rem 1.2rem;
   background: var(--core);
   border: 1px solid var(--core-line);
   border-radius: var(--r-lg);
@@ -20,8 +20,27 @@
 .mapa-pais {
   fill: var(--shell);
   stroke: var(--shell-line);
-  stroke-width: 1.5;
+  stroke-width: 1.4;
   stroke-linejoin: round;
+}
+
+/* ------------------------------------------------------- Enlaces ---- */
+/* Líneas desde la sede principal a cada sucursal: dan la idea de red sin
+   competir con el contorno. */
+.mapa-enlaces line {
+  stroke: var(--shell-line);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 6;
+  stroke-linecap: round;
+  transition:
+    stroke 0.5s var(--ease-fluid),
+    opacity 0.5s var(--ease-fluid);
+  opacity: 0.75;
+}
+
+.mapa-enlaces line[data-activa='true'] {
+  stroke: var(--accent);
+  opacity: 1;
 }
 
 /* --------------------------------------------------------- Sedes ---- */
@@ -35,19 +54,23 @@
 
 .mapa-pin {
   fill: var(--muted);
+  stroke: var(--core);
+  stroke-width: 2.5;
   transition:
     fill 0.45s var(--ease-fluid),
     r 0.45s var(--ease-spring);
 }
 
+.mapa-pin[data-principal='true'] {
+  fill: var(--text-soft);
+}
+
 .mapa-punto:hover .mapa-pin {
   fill: var(--cyan);
-  r: 8;
 }
 
 .mapa-punto[data-activa='true'] .mapa-pin {
   fill: var(--accent);
-  r: 8;
 }
 
 /* Anillo de la sede en curso: late para localizarla de un vistazo. */
@@ -63,33 +86,43 @@
 @keyframes mapa-latido {
   0% {
     opacity: 0.9;
-    transform: scale(0.7);
+    transform: scale(0.55);
   }
   70%,
   100% {
     opacity: 0;
-    transform: scale(1.5);
+    transform: scale(1.6);
   }
 }
 
 .mapa-etiqueta {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   fill: var(--text-soft);
+  /* Filete del color del país: separa el texto del contorno cuando cae
+     encima, sin recuadros ni sombras. */
+  paint-order: stroke;
+  stroke: var(--shell);
+  stroke-width: 4;
+  stroke-linejoin: round;
   transition: fill 0.45s var(--ease-fluid);
   pointer-events: none;
 }
 
+.mapa-punto:hover .mapa-etiqueta {
+  fill: var(--text);
+}
+
 .mapa-punto[data-activa='true'] .mapa-etiqueta {
   fill: var(--text);
+  font-weight: 700;
 }
 
 .mapa-punto:focus-visible {
   outline: none;
 }
 .mapa-punto:focus-visible .mapa-pin {
-  fill: var(--cyan);
   stroke: var(--cyan);
   stroke-width: 4;
 }
