@@ -197,11 +197,21 @@
 .visor {
   position: fixed;
   inset: 0;
+  /* dvh: en el móvil la barra del navegador entra y sale, y con el alto fijo
+     el visor quedaba más alto que la pantalla visible. */
+  height: 100dvh;
   z-index: var(--z-visor);
   display: grid;
   place-items: center;
   padding: clamp(1rem, 5vw, 3rem);
   background: #060b12;
+  /* El visor se pinta como una capa propia y aislada. Sin esto, en iOS los
+     botones —que animan transform— se promocionan a capas sueltas sobre un
+     fondo que no se repinta con ellas, y en los bordes aparecían costuras:
+     dos líneas horizontales cruzando la foto a la altura de las flechas. */
+  isolation: isolate;
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 /* La foto conserva su proporción y se ajusta al hueco disponible. */
@@ -228,16 +238,19 @@
   background: #16222f;
   color: #eaf2fa;
   transition:
-    transform 0.5s var(--ease-fluid),
+    background 0.4s var(--ease-fluid),
     border-color 0.4s var(--ease-fluid),
     color 0.4s var(--ease-fluid);
 }
 
+/* El realce va en el color, no en una transformación: animar transform en
+   estos botones los promociona a capa propia dentro del visor, que es
+   justo lo que provocaba las costuras en iOS. */
 .visor-cerrar:hover,
 .visor-nav:hover {
   color: var(--accent);
   border-color: var(--accent);
-  transform: scale(1.07);
+  background: #1e2c3b;
 }
 
 .visor-cerrar {

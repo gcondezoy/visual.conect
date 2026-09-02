@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { MapPin, X, CaretLeft, CaretRight, Broadcast } from '@phosphor-icons/react'
 import Reveal from './Reveal.jsx'
@@ -78,10 +79,27 @@ export default function Sedes() {
       if (e.key === 'ArrowLeft') setVisor((i) => (i - 1 + total) % total)
     }
     window.addEventListener('keydown', alPulsar)
-    document.body.style.overflow = 'hidden'
+
+    // Bloqueo de scroll del fondo. En iOS `overflow: hidden` sobre el body no
+    // basta: la página sigue desplazándose bajo el visor y deja rastros de lo
+    // que había pintado detrás. Fijar el body en su posición actual sí frena
+    // el fondo; al cerrar se devuelve el scroll donde estaba.
+    const desplazamiento = window.scrollY
+    const previo = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    }
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${desplazamiento}px`
+    document.body.style.width = '100%'
+
     return () => {
       window.removeEventListener('keydown', alPulsar)
-      document.body.style.overflow = ''
+      document.body.style.position = previo.position
+      document.body.style.top = previo.top
+      document.body.style.width = previo.width
+      window.scrollTo(0, desplazamiento)
     }
   }, [visor, total])
 
@@ -247,9 +265,15 @@ export default function Sedes() {
         </div>
       </div>
 
-      {/* Visor a pantalla completa */}
-      <AnimatePresence>
-        {visor !== null && (
+      {/* Visor a pantalla completa.
+          Se monta directamente en <body> mediante un portal, no dentro de la
+          sección. Un overlay anidado depende de que ningún ancestro cree un
+          contexto de apilado ni recorte el desbordamiento, y basta un
+          `transform` de una animación para romperlo; colgándolo del body no
+          hay ancestro del que depender. */}
+      {createPortal(
+        <AnimatePresence>
+          {visor !== null && (
           <motion.div
             className="visor"
             initial={{ opacity: 0 }}
@@ -306,8 +330,10 @@ export default function Sedes() {
               {visor + 1} / {fotos.length}
             </span>
           </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </section>
   )
 }
