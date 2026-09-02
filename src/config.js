@@ -12,9 +12,11 @@ export const NEGOCIO = {
   // --- Contacto ---
   // WhatsApp en formato internacional SIN el signo "+" ni espacios
   // (51 = Perú). Aquí llegan las postulaciones y las consultas.
-  whatsapp: '51955314800',
-  whatsappVisible: '955 314 800', // cómo se muestra en pantalla
-  telefono: '(01) 707-3000',
+  //
+  // No hay teléfono fijo: el (01) 707-3000 que figuraba antes es la central
+  // de WIN, no de Visual Connections. Los canales son correo y WhatsApp.
+  whatsapp: '51922694968',
+  whatsappVisible: '922 694 968', // cómo se muestra en pantalla
   email: 'contacto@visualconnections.pe',
 
   // --- Página hermana: KMT (área de ventas) ---

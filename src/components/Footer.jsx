@@ -1,6 +1,5 @@
 import {
   ArrowUpRight,
-  Phone,
   EnvelopeSimple,
   WhatsappLogo,
   FacebookLogo,
@@ -86,9 +85,6 @@ export default function Footer() {
 
         <div className="footer__col">
           <h4>Contacto</h4>
-          <a href={`tel:${NEGOCIO.telefono.replace(/\s|\(|\)|-/g, '')}`}>
-            <Phone weight="fill" size={15} /> {NEGOCIO.telefono}
-          </a>
           <a href={`mailto:${NEGOCIO.email}`}>
             <EnvelopeSimple weight="fill" size={15} /> {NEGOCIO.email}
           </a>

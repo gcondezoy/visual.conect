@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   WhatsappLogo,
-  Phone,
   EnvelopeSimple,
   Clock,
   MapPin,
@@ -63,13 +62,6 @@ export default function Contacto() {
           {/* Datos de contacto */}
           <Reveal className="contacto__info" direction="right">
             <div className="contacto__cards">
-              <a href={`tel:${NEGOCIO.telefono.replace(/\s|\(|\)|-/g, '')}`} className="cinfo">
-                <Phone weight="duotone" size={22} />
-                <div>
-                  <span>Teléfono</span>
-                  <strong>{NEGOCIO.telefono}</strong>
-                </div>
-              </a>
               <a href={`mailto:${NEGOCIO.email}`} className="cinfo">
                 <EnvelopeSimple weight="duotone" size={22} />
                 <div>
