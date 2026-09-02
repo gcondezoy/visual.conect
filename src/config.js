@@ -37,6 +37,13 @@ export const NEGOCIO = {
 }
 
 // --- Sedes / sucursales ---
+//
+// ORDEN: de sur a norte (Lima → Trujillo → Chiclayo → Piura), que es como se
+// leen los puntos del mapa de abajo hacia arriba. Este arreglo alimenta las
+// pestañas de la sección Sedes y el listado de Contáctanos, así que al
+// agregar o mover una sede hay que respetar el orden por latitud para que
+// pestañas y mapa sigan coincidiendo.
+//
 // El número de cuadrillas por sede se omite a propósito: cambia cada semana.
 // La cifra que se comunica es la nacional (ver CUADRILLAS_NACIONAL).
 // lat/lon ubican el punto en el mapa del Perú.
@@ -60,15 +67,6 @@ export const SEDES = [
     lon: -79.03,
   },
   {
-    id: 'piura',
-    ciudad: 'Piura',
-    etiqueta: 'Sucursal',
-    direccion: 'Mza. M Lote. 44, A.H. Alm. Miguel Grau (2da etapa)',
-    servicios: 'Averías, instalaciones, ordenamiento y etiquetado',
-    lat: -5.19,
-    lon: -80.63,
-  },
-  {
     id: 'chiclayo',
     ciudad: 'Chiclayo',
     etiqueta: 'Sucursal',
@@ -76,6 +74,15 @@ export const SEDES = [
     servicios: 'Averías, instalaciones, ordenamiento y etiquetado',
     lat: -6.77,
     lon: -79.84,
+  },
+  {
+    id: 'piura',
+    ciudad: 'Piura',
+    etiqueta: 'Sucursal',
+    direccion: 'Mza. M Lote. 44, A.H. Alm. Miguel Grau (2da etapa)',
+    servicios: 'Averías, instalaciones, ordenamiento y etiquetado',
+    lat: -5.19,
+    lon: -80.63,
   },
 ]
 
