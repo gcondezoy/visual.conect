@@ -95,6 +95,21 @@ export default function Footer() {
           <a href={buildWhatsAppLink('¡Hola Visual Connections!')} target="_blank" rel="noreferrer">
             <WhatsappLogo weight="fill" size={15} /> {NEGOCIO.whatsappVisible}
           </a>
+
+          {/* El acceso debe verse sin buscarlo (Ley 29571). Va aquí, en el
+              cuerpo del pie, y no en la franja de copyright: ahí quedaba
+              enterrado y en el móvil lo tapaba la barra de acciones. */}
+          <button
+            type="button"
+            className="footer__libro"
+            onClick={() => setLibroAbierto(true)}
+          >
+            <BookOpen weight="fill" size={20} />
+            <span>
+              <strong>Libro de Reclamaciones</strong>
+              <small>Presenta un reclamo o queja</small>
+            </span>
+          </button>
         </div>
       </div>
 
@@ -106,16 +121,7 @@ export default function Footer() {
             {NEGOCIO.nombre}. Todos los derechos reservados.
           </span>
 
-          {/* El acceso al Libro de Reclamaciones debe ser visible y estar en
-              todas las páginas (Ley 29571). */}
-          <button
-            type="button"
-            className="footer__libro"
-            onClick={() => setLibroAbierto(true)}
-          >
-            <BookOpen weight="fill" size={16} />
-            Libro de Reclamaciones
-          </button>
+          <span className="footer__made">Hecho con precisión para conectar el Perú.</span>
         </div>
       </div>
 
