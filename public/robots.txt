@@ -1,0 +1,7 @@
+# Corporación Visual Connections
+# Al publicar en el dominio propio, actualizar la dirección del sitemap.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://visual-conect-seven.vercel.app/sitemap.xml

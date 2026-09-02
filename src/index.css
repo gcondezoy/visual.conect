@@ -109,7 +109,10 @@
 
   --text: #0d2033;
   --text-soft: #3d5c78;
-  --muted: #64809a;
+  /* Se oscurece para alcanzar 4.5:1 (WCAG AA para texto pequeño) incluso
+     sobre --shell, que es el fondo más claro donde aparece. Con #64809a
+     quedaba en 3.4:1 en etiquetas de 11-14 px. */
+  --muted: #4f6880;
 
   --accent-soft: #fbeddc;
   --cyan-soft: #dfeef7;

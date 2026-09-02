@@ -26,28 +26,119 @@
       name="description"
       content="Partner autorizado de WIN y ENTEL. Instalación, averías, traslados y mantenimiento de telecomunicaciones en Lima, Trujillo, Piura y Chiclayo. Únete a nuestro equipo técnico."
     />
+    <!-- Al publicar en el dominio propio, reemplazar esta URL en los tres
+         sitios donde aparece: canonical, og:url y og:image. WhatsApp, Facebook
+         y LinkedIn descartan las imágenes con ruta relativa, así que og:image
+         tiene que ser una dirección absoluta. -->
+    <link rel="canonical" href="https://visual-conect-seven.vercel.app/" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Corporación Visual Connections" />
     <meta property="og:title" content="Corporación Visual Connections | Telecomunicaciones" />
     <meta
       property="og:description"
       content="Experiencia, puntualidad, calidad y garantía en servicios de telecomunicaciones a nivel nacional. Partner de WIN y ENTEL."
     />
     <meta property="og:locale" content="es_PE" />
-    <meta property="og:image" content="/img/logo-full.webp" />
+    <meta property="og:url" content="https://visual-conect-seven.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://visual-conect-seven.vercel.app/img/logo-full.webp"
+    />
+    <meta property="og:image:alt" content="Logotipo de Corporación Visual Connections" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Corporación Visual Connections | Telecomunicaciones" />
+    <meta
+      name="twitter:description"
+      content="Partner autorizado de WIN y ENTEL. Instalación, averías, traslados y mantenimiento a nivel nacional."
+    />
+    <meta
+      name="twitter:image"
+      content="https://visual-conect-seven.vercel.app/img/logo-full.webp"
+    />
+    <!-- Datos estructurados: declaran las cuatro sedes con sus coordenadas,
+         no solo la principal, para que las búsquedas locales de cada ciudad
+         puedan encontrarlas. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Corporación Visual Connections",
+        "alternateName": "Visual Connections",
+        "url": "https://visual-conect-seven.vercel.app/",
+        "logo": "https://visual-conect-seven.vercel.app/img/logo-full.webp",
         "foundingDate": "2017",
         "description": "Servicios de instalación, averías, traslados y mantenimiento de telecomunicaciones. Partner autorizado de WIN y ENTEL.",
-        "areaServed": "Perú",
+        "areaServed": { "@type": "Country", "name": "Perú" },
+        "knowsLanguage": "es-PE",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "telephone": "+51922694968",
+            "email": "contacto@visualconnections.pe",
+            "areaServed": "PE",
+            "availableLanguage": "Spanish"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Jr. 12 de Julio Nro. 201 Urb. Mesa Redonda",
-          "addressLocality": "San Martín de Porres, Lima",
+          "streetAddress": "Jr. 12 de Julio Nro. 201, Urb. Mesa Redonda",
+          "addressLocality": "San Martín de Porres",
+          "addressRegion": "Lima",
           "addressCountry": "PE"
-        }
+        },
+        "location": [
+          {
+            "@type": "Place",
+            "name": "Sede Principal — Lima",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Jr. 12 de Julio Nro. 201, Urb. Mesa Redonda",
+              "addressLocality": "San Martín de Porres",
+              "addressRegion": "Lima",
+              "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -12.05, "longitude": -77.05 }
+          },
+          {
+            "@type": "Place",
+            "name": "Sucursal Trujillo",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Mza. C Lote. 2, Urb. Santa Otilia",
+              "addressLocality": "Trujillo",
+              "addressRegion": "La Libertad",
+              "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -8.11, "longitude": -79.03 }
+          },
+          {
+            "@type": "Place",
+            "name": "Sucursal Chiclayo",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Otr. Prol. Bolognesi Nro. Sub Lote. A-10, Fnd. Cerropón",
+              "addressLocality": "Chiclayo",
+              "addressRegion": "Lambayeque",
+              "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -6.77, "longitude": -79.84 }
+          },
+          {
+            "@type": "Place",
+            "name": "Sucursal Piura",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Mza. M Lote. 44, A.H. Alm. Miguel Grau (2da etapa)",
+              "addressLocality": "Piura",
+              "addressRegion": "Piura",
+              "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -5.19, "longitude": -80.63 }
+          }
+        ]
       }
     </script>
   </head>

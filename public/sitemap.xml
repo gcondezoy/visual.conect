@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Es una sola página con secciones ancladas, así que el sitemap tiene una
+  única entrada. Al publicar en el dominio propio hay que cambiar la
+  dirección, igual que en robots.txt y en las etiquetas del index.html.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://visual-conect-seven.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
