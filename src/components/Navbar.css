@@ -14,7 +14,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: var(--z-nav);
   display: flex;
   justify-content: center;
   padding: clamp(0.8rem, 2vw, 1.4rem) clamp(1rem, 4vw, 2rem);
@@ -65,6 +65,11 @@
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* 44 px siempre: a 1024 px ya se muestra la navegación de escritorio, pero
+     una tablet en horizontal mide justo eso y se sigue tocando con el dedo. */
+  min-height: 44px;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-soft);
@@ -128,8 +133,8 @@
 .nav-hamburguesa {
   display: none;
   position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 44px;
+  height: 44px;
   border-radius: var(--r-pill);
   border: 1px solid var(--shell-line);
   background: var(--shell);
@@ -169,13 +174,23 @@
 .nav-panel {
   position: fixed;
   inset: 0;
-  z-index: 39;
+  /* dvh, no vh: en el móvil la barra del navegador aparece y desaparece, y
+     con vh el panel quedaba más alto que la pantalla visible. */
+  height: 100dvh;
+  z-index: var(--z-panel);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* "safe" evita que, cuando el contenido no entra, el centrado recorte lo
+     de arriba y deje los primeros enlaces fuera de alcance. */
+  justify-content: safe center;
   gap: 0.3rem;
-  padding: 6rem clamp(1.5rem, 8vw, 4rem) 3rem;
+  padding: 5.5rem clamp(1.5rem, 8vw, 4rem);
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
+  /* Si los enlaces no caben (pantallas bajas o en horizontal), el panel se
+     desplaza en vez de cortarlos. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -197,12 +212,15 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
+  min-height: 44px; /* objetivo táctil, aunque el texto sea más bajo */
   font-family: var(--font-head);
-  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  /* El tamaño también mira la altura: en pantallas bajas los seis enlaces
+     más el botón de KMT no caben si solo se escala por el ancho. */
+  font-size: clamp(1.5rem, min(7vw, 4.2vh), 2.6rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-soft);
-  padding-block: 0.42rem;
+  padding-block: clamp(0.25rem, 0.8vh, 0.42rem);
   /* Cada enlace sube desde una caja invisible, en cascada. */
   opacity: 0;
   transform: translateY(28px);
@@ -232,7 +250,8 @@
 
 .nav-panel-kmt {
   align-self: flex-start;
-  margin-top: 2rem;
+  flex: none; /* no se comprime cuando el panel va justo de alto */
+  margin-top: clamp(1rem, 3vh, 2rem);
   opacity: 0;
   transform: translateY(28px);
   transition:
@@ -256,9 +275,6 @@
   }
   .nav-hamburguesa {
     display: block;
-    /* Mínimo táctil recomendado (WCAG 2.5.5 / Apple HIG): 44 px. */
-    width: 44px;
-    height: 44px;
   }
   .nav-acciones {
     margin-left: auto;
@@ -282,5 +298,27 @@
 @media (max-width: 420px) {
   .nav-isla {
     padding-left: 0.85rem;
+  }
+}
+
+/* Pantallas bajas: teléfono en horizontal, o ventanas de escritorio muy
+   achatadas. Apilados en una columna, los seis enlaces más el botón de KMT
+   obligan a desplazar el menú; en dos columnas entran de una vez. */
+@media (max-height: 560px) and (max-width: 1020px) {
+  .nav-panel {
+    padding-top: 4.75rem;
+  }
+  .nav-panel-links {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: clamp(1.5rem, 6vw, 3rem);
+    justify-content: start;
+  }
+  .nav-panel-links a {
+    font-size: clamp(1.25rem, 4.6vh, 1.7rem);
+    padding-block: 0.2rem;
+  }
+  .nav-panel-kmt {
+    margin-top: 1rem;
   }
 }

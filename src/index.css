@@ -35,6 +35,19 @@
   /* ---- Layout ---- */
   --maxw: 1180px;
   --nav-h: 90px;
+
+  /* ---- Capas ----
+     Orden de apilado de toda la interfaz, en un solo lugar. Antes cada
+     componente elegía su número por su cuenta y el menú móvil (39) quedaba
+     por debajo de la barra de acciones (80): la barra tapaba el botón de
+     KMT. Cualquier capa nueva se declara aquí. */
+  --z-fondo: -2; /* color de fondo de la página */
+  --z-fibra: -1; /* malla de fibra óptica */
+  --z-progreso: 30; /* barra de avance de lectura */
+  --z-flotante: 60; /* botón de WhatsApp y barra de acciones móvil */
+  --z-panel: 70; /* menú móvil a pantalla completa */
+  --z-nav: 80; /* isla de navegación: visible incluso sobre el menú */
+  --z-visor: 100; /* visor de fotos: cubre todo */
 }
 
 /* ------------------------------------------------ TEMA OSCURO (default) ---- */
@@ -183,7 +196,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: var(--z-fondo);
   pointer-events: none;
   background: var(--bg);
   transition: background 0.5s var(--ease-fluid);
@@ -331,6 +344,8 @@ p {
   position: relative;
   display: inline-flex;
   align-items: center;
+  /* Ningún botón baja de 44 px de alto, se toque con el dedo o con ratón. */
+  min-height: 44px;
   gap: 0.7rem;
   font-weight: 600;
   font-size: 0.97rem;

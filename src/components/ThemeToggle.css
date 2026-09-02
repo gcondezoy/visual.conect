@@ -2,8 +2,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 44px;
+  height: 44px;
   border-radius: var(--r-pill);
   color: var(--text-soft);
   background: var(--shell);
@@ -24,14 +24,6 @@
 
 .tema-toggle:active {
   transform: scale(0.93);
-}
-
-/* Mínimo táctil de 44 px en pantallas donde se usa el dedo. */
-@media (max-width: 1020px) {
-  .tema-toggle {
-    width: 44px;
-    height: 44px;
-  }
 }
 
 /* Los dos iconos ocupan la misma celda; solo uno está presente a la vez. */

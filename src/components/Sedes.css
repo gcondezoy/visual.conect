@@ -14,6 +14,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  /* 44 px de alto siempre, no solo en móvil: el tamaño mínimo de un objetivo
+     táctil no depende del ancho de la ventana, y con ratón tampoco estorba. */
+  min-height: 44px;
   padding: 0.6rem 1.1rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--shell-line);
@@ -194,7 +197,7 @@
 .visor {
   position: fixed;
   inset: 0;
-  z-index: 70;
+  z-index: var(--z-visor);
   display: grid;
   place-items: center;
   padding: clamp(1rem, 5vw, 3rem);
@@ -294,7 +297,6 @@
   .sede-tab {
     flex: 1 1 auto;
     justify-content: center;
-    min-height: 44px; /* mínimo táctil */
   }
   .sede-foto-mas {
     right: 0.4rem;
@@ -304,9 +306,12 @@
   }
 }
 
-/* Los controles del visor son más grandes con el dedo, y las flechas bajan
-   para no taparse con la propia foto. */
+/* Lo que se toca con el dedo se mide por el tipo de puntero, no por el ancho
+   de la pantalla: un teléfono en horizontal es ancho y se sigue tocando. */
 @media (pointer: coarse) {
+  .sede-tab {
+    min-height: 44px;
+  }
   .visor-cerrar,
   .visor-nav {
     width: 3.25rem;
