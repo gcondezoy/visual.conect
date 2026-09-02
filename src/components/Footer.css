@@ -175,3 +175,34 @@
     align-items: flex-start;
   }
 }
+
+/* --- Acceso al Libro de Reclamaciones --- */
+/* Debe verse sin buscarlo: se le da forma de botón con filete, no de enlace
+   perdido entre el texto legal. */
+.footer__libro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  border: 1px solid var(--shell-line);
+  border-radius: var(--r-pill);
+  background: var(--shell);
+  transition:
+    color 0.4s var(--ease-fluid),
+    border-color 0.4s var(--ease-fluid),
+    transform 0.4s var(--ease-fluid);
+}
+
+.footer__libro svg {
+  color: var(--accent-text);
+}
+
+.footer__libro:hover {
+  color: var(--text);
+  border-color: var(--accent-line);
+  transform: translateY(-2px);
+}

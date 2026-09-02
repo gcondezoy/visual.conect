@@ -92,6 +92,19 @@ export const SEDES = [
 // comunica como promedio y no como número exacto por sede.
 export const CUADRILLAS_NACIONAL = '+50'
 
+// --- Libro de Reclamaciones (Ley 29571 — INDECOPI) ---
+// Contenido exigido por el D.S. 011-2011-PCM. La razón social y el RUC deben
+// figurar tal como están inscritos; el plazo de respuesta es de 15 días
+// hábiles, prorrogable a 30 con aviso al consumidor.
+export const RECLAMACIONES = {
+  razonSocial: 'CORPORACIÓN VISUAL CONNECTIONS S.A.C.',
+  ruc: '20547356340',
+  // Donde llega el reclamo. Conviene que sea una casilla distinta de la
+  // comercial, para que ningún reclamo se pierda entre consultas.
+  email: 'contacto@visualconnections.pe',
+  plazoDias: 15,
+}
+
 // --- Áreas para el formulario "Trabaja con nosotros" ---
 export const AREAS_POSTULACION = [
   'Técnico Principal',

@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import {
   ArrowUpRight,
+  BookOpen,
   EnvelopeSimple,
   WhatsappLogo,
   FacebookLogo,
@@ -9,6 +11,7 @@ import {
 import { NEGOCIO } from '../config.js'
 import { buildWhatsAppLink } from '../whatsapp.js'
 import LogoMark from './LogoMark.jsx'
+import LibroReclamaciones from './LibroReclamaciones.jsx'
 import './Footer.css'
 
 const REDES = [
@@ -18,6 +21,7 @@ const REDES = [
 ]
 
 export default function Footer() {
+  const [libroAbierto, setLibroAbierto] = useState(false)
   const anio = 2017
   const redesActivas = REDES.filter((r) => NEGOCIO.redes[r.key])
 
@@ -101,9 +105,21 @@ export default function Footer() {
             {new Date().getFullYear() > anio ? `–${new Date().getFullYear()}` : ''}{' '}
             {NEGOCIO.nombre}. Todos los derechos reservados.
           </span>
-          <span className="footer__made">Hecho con precisión para conectar el Perú.</span>
+
+          {/* El acceso al Libro de Reclamaciones debe ser visible y estar en
+              todas las páginas (Ley 29571). */}
+          <button
+            type="button"
+            className="footer__libro"
+            onClick={() => setLibroAbierto(true)}
+          >
+            <BookOpen weight="fill" size={16} />
+            Libro de Reclamaciones
+          </button>
         </div>
       </div>
+
+      <LibroReclamaciones abierto={libroAbierto} onCerrar={() => setLibroAbierto(false)} />
     </footer>
   )
 }

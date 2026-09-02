@@ -1,0 +1,244 @@
+/* Capa del modal: misma altura de apilado que el visor de fotos. */
+.libro {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  z-index: var(--z-visor);
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  background: rgba(4, 8, 13, 0.82);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  isolation: isolate;
+}
+
+.libro-hoja {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: calc(100dvh - clamp(1.5rem, 6vw, 4rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--core);
+  border: 1px solid var(--core-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--ambient-lift);
+}
+
+.libro-hoja:focus {
+  outline: none;
+}
+
+.libro-cerrar {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.1rem);
+  right: clamp(0.75rem, 2vw, 1.1rem);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--shell-line);
+  background: var(--shell);
+  color: var(--text-soft);
+  transition:
+    color 0.4s var(--ease-fluid),
+    border-color 0.4s var(--ease-fluid);
+}
+
+.libro-cerrar:hover {
+  color: var(--accent-text);
+  border-color: var(--accent-line);
+}
+
+/* ------------------------------------------------------- Encabezado ---- */
+.libro-encabezado {
+  margin-bottom: 1.75rem;
+  padding-right: 3rem;
+}
+
+.libro-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  margin-bottom: 1rem;
+}
+
+.libro-encabezado h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  margin-bottom: 0.4rem;
+}
+
+.libro-empresa {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 0.9rem;
+}
+
+/* El aviso legal debe estar presente, pero no compite con el formulario. */
+.libro-legal {
+  font-size: 0.79rem;
+  line-height: 1.6;
+  color: var(--muted);
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--shell);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+/* ------------------------------------------------ Reclamo vs. queja ---- */
+.libro-tipo {
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.libro-tipo legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.65rem;
+}
+
+.libro-tipo-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+
+.libro-tipo-opciones label {
+  display: block;
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  min-height: 44px;
+  border: 1px solid var(--core-line);
+  border-radius: var(--r-md);
+  background: var(--shell);
+  transition:
+    border-color 0.4s var(--ease-fluid),
+    background 0.4s var(--ease-fluid);
+}
+
+.libro-tipo-opciones label[data-activo='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* El radio se oculta pero sigue siendo accesible por teclado. */
+.libro-tipo-opciones input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.libro-tipo-opciones input:focus-visible + strong {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.libro-tipo-opciones strong {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.libro-tipo-opciones span {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------- Form ---- */
+.libro-seccion {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 1.75rem 0 0.9rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--core-line);
+}
+
+.libro-seccion:first-of-type {
+  margin-top: 0;
+}
+
+.libro-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+.libro-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+/* ---------------------------------------------------------- Éxito ---- */
+.libro-exito {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.7rem;
+  padding: 2rem 0 1rem;
+}
+
+.libro-exito svg {
+  color: var(--whatsapp);
+}
+
+.libro-exito h3 {
+  font-size: 1.4rem;
+}
+
+.libro-exito p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+.libro-exito strong {
+  font-family: var(--font-mono);
+  color: var(--accent-text);
+  letter-spacing: 0.05em;
+}
+
+.libro-exito-nota {
+  font-size: 0.85rem !important;
+  color: var(--muted) !important;
+  max-width: 42ch;
+}
+
+.libro-exito .btn {
+  margin-top: 0.8rem;
+}
+
+/* --------------------------------------------------------- Móvil ---- */
+@media (max-width: 560px) {
+  .libro-tipo-opciones {
+    grid-template-columns: 1fr;
+  }
+  .libro-encabezado {
+    padding-right: 3.25rem;
+  }
+}
