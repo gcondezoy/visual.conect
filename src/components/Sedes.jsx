@@ -52,6 +52,23 @@ export default function Sedes() {
   const mover = (paso) =>
     setVisor((i) => (i === null ? null : (i + paso + total) % total))
 
+  // Flechas para moverse entre pestañas, Inicio/Fin para ir a los extremos.
+  const refsTabs = useRef([])
+
+  const alPulsarTab = (e, i) => {
+    const saltos = { ArrowRight: 1, ArrowLeft: -1 }
+    let destino = null
+
+    if (e.key in saltos) destino = (i + saltos[e.key] + GRUPOS.length) % GRUPOS.length
+    else if (e.key === 'Home') destino = 0
+    else if (e.key === 'End') destino = GRUPOS.length - 1
+    else return
+
+    e.preventDefault()
+    setActiva(GRUPOS[destino].id)
+    refsTabs.current[destino]?.focus()
+  }
+
   // Teclado dentro del visor: cerrar y navegar.
   useEffect(() => {
     if (visor === null) return
@@ -67,6 +84,16 @@ export default function Sedes() {
       document.body.style.overflow = ''
     }
   }, [visor, total])
+
+  // Con el visor abierto se traen la foto siguiente y la anterior: al pulsar
+  // la flecha ya están en caché y el cambio se ve inmediato.
+  useEffect(() => {
+    if (visor === null || total < 2) return
+    for (const paso of [1, -1]) {
+      const vecina = fotos[(visor + paso + total) % total]
+      if (vecina) new Image().src = vecina.src
+    }
+  }, [visor, fotos, total])
 
   // Deslizar para cambiar de foto: en el móvil es el gesto natural; apuntar
   // a una flecha con el dedo no lo es.
@@ -109,14 +136,22 @@ export default function Sedes() {
 
         <Reveal delay={0.08}>
           <div className="sedes-tabs" role="tablist" aria-label="Selecciona una sede">
-            {GRUPOS.map((g) => (
+            {GRUPOS.map((g, i) => (
               <button
                 key={g.id}
+                id={`tab-${g.id}`}
                 role="tab"
                 aria-selected={g.id === activa}
+                aria-controls="panel-sede"
+                // Recorrido con una sola parada: el tabulador entra al grupo
+                // de pestañas y se cambia de sede con las flechas, como marca
+                // el patrón de pestañas de ARIA.
+                tabIndex={g.id === activa ? 0 : -1}
+                ref={(el) => (refsTabs.current[i] = el)}
                 className="sede-tab"
                 data-activa={g.id === activa}
                 onClick={() => setActiva(g.id)}
+                onKeyDown={(e) => alPulsarTab(e, i)}
               >
                 {g.ciudad}
               </button>
@@ -124,7 +159,12 @@ export default function Sedes() {
           </div>
         </Reveal>
 
-        <div className="sede-panel">
+        <div
+          className="sede-panel"
+          id="panel-sede"
+          role="tabpanel"
+          aria-labelledby={`tab-${activa}`}
+        >
           {/* Columna izquierda: el mapa se mantiene fijo entre sedes (solo
               cambia el punto activo); la ficha sí se renueva. */}
           <aside className="sede-lateral">

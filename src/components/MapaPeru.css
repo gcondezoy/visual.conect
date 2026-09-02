@@ -38,9 +38,38 @@
   opacity: 0.75;
 }
 
-.mapa-enlaces line[data-activa='true'] {
+.mapa-enlaces g[data-activa='true'] line {
   stroke: var(--accent);
   opacity: 1;
+}
+
+/* Pulso que recorre el enlace desde la sede principal hasta la sucursal.
+   Solo anima transform y opacity, así que no cuesta repintados. */
+.mapa-pulso {
+  fill: var(--cyan);
+  opacity: 0;
+  animation: mapa-transmite 3.4s var(--ease-fluid) infinite;
+}
+
+.mapa-enlaces g[data-activa='true'] .mapa-pulso {
+  fill: var(--accent);
+}
+
+@keyframes mapa-transmite {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
 }
 
 /* --------------------------------------------------------- Sedes ---- */
@@ -119,17 +148,20 @@
   font-weight: 700;
 }
 
-.mapa-punto:focus-visible {
-  outline: none;
-}
+/* El foco de teclado usa el mismo indicador que el resto del sitio; además
+   el punto se tiñe para que se vea cuál sede quedaría elegida. */
 .mapa-punto:focus-visible .mapa-pin {
-  stroke: var(--cyan);
-  stroke-width: 4;
+  fill: var(--cyan);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mapa-halo {
     animation: none;
     opacity: 0.6;
+  }
+  /* Sin movimiento no hay pulso que seguir: se retira en vez de quedar
+     detenido a mitad de camino. */
+  .mapa-pulso {
+    display: none;
   }
 }

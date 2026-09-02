@@ -1,4 +1,5 @@
 import FiberOptic from './components/FiberOptic.jsx'
+import ProgresoScroll from './components/ProgresoScroll.jsx'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import Metrics from './components/Metrics.jsx'
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <>
       <FiberOptic />
+      <ProgresoScroll />
       <Navbar />
       <main>
         <Hero />

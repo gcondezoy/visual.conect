@@ -129,63 +129,38 @@ export const GALERIA = {
   "chiclayo": [
     {
       "src": "/img/sedes/chiclayo-01.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 788,
+      "alto": 1400
     },
     {
       "src": "/img/sedes/chiclayo-02.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 1400,
+      "alto": 789
     },
     {
       "src": "/img/sedes/chiclayo-03.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 1400,
+      "alto": 788
     },
     {
       "src": "/img/sedes/chiclayo-04.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 788,
+      "alto": 1400
     },
     {
       "src": "/img/sedes/chiclayo-05.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 1400,
+      "alto": 788
     },
     {
       "src": "/img/sedes/chiclayo-06.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 788,
+      "alto": 1400
     },
     {
       "src": "/img/sedes/chiclayo-07.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/chiclayo-08.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/chiclayo-09.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/chiclayo-10.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/chiclayo-11.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/chiclayo-12.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 1400,
+      "alto": 788
     }
   ],
   "comercial": [

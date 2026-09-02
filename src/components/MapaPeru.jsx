@@ -26,20 +26,30 @@ export default function MapaPeru({ sedes, activa, onSeleccionar }) {
       >
         <path d={MAPA.path} className="mapa-pais" />
 
-        {/* Enlaces desde la sede principal: la red que une las sedes. */}
+        {/* Enlaces desde la sede principal, con un pulso de señal viajando
+            por cada uno: la red se ve transmitiendo, no solo dibujada. */}
         <g className="mapa-enlaces" aria-hidden="true">
           {puntos
             .filter((p) => p.id !== principal.id)
-            .map((p) => (
-              <line
-                key={p.id}
-                x1={principal.x}
-                y1={principal.y}
-                x2={p.x}
-                y2={p.y}
-                data-activa={p.id === activa || principal.id === activa}
-              />
-            ))}
+            .map((p, i) => {
+              const encendido = p.id === activa || principal.id === activa
+              return (
+                <g key={p.id} data-activa={encendido}>
+                  <line x1={principal.x} y1={principal.y} x2={p.x} y2={p.y} />
+                  <circle
+                    className="mapa-pulso"
+                    cx={principal.x}
+                    cy={principal.y}
+                    r="3.5"
+                    style={{
+                      '--dx': `${(p.x - principal.x).toFixed(1)}px`,
+                      '--dy': `${(p.y - principal.y).toFixed(1)}px`,
+                      animationDelay: `${i * 0.9}s`,
+                    }}
+                  />
+                </g>
+              )
+            })}
         </g>
 
         {puntos.map((s) => {

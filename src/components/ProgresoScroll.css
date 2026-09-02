@@ -1,0 +1,14 @@
+.progreso-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 50;
+  pointer-events: none;
+  background: var(--accent);
+  /* scaleX en vez de width: la anchura recalcularía la maquetación en cada
+     frame; la transformación la resuelve la GPU. */
+  transform: scaleX(var(--avance, 0));
+  transform-origin: left center;
+}
