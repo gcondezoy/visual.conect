@@ -1,14 +1,16 @@
 /**
  * Pipeline de assets — Visual Connections
  *
- * 1. Convierte todas las fotos de sedes a WebP con formato uniforme (4:3).
+ * 1. Convierte las fotos de sedes a WebP conservando su proporcion original.
+ *    Las tandas nuevas se suman a la galeria y los originales se archivan.
  * 2. Recorta el isotipo (antena) del logo oficial y lo deja con fondo transparente.
  * 3. Genera el lockup completo en dos variantes (tema claro / tema oscuro).
  *
  * Uso:  node scripts/build-assets.mjs
  */
 import sharp from 'sharp'
-import { readdir, mkdir, rename, stat, writeFile } from 'node:fs/promises'
+import { readdir, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
@@ -24,13 +26,16 @@ const ARCHIVO_ORIGINALES = path.join(RAIZ, '_originales', 'sedes')
 // medias), así que la rejilla se adapta a la foto y no al revés.
 const FOTO = { ladoMax: 1400, calidad: 74 }
 
-// Carpeta original -> prefijo de archivo
+// Prefijo de archivo -> nombres de carpeta admitidos.
+// Se aceptan varios porque las fotos llegan en tandas y no siempre con la
+// misma etiqueta: la sede de Lima ha venido como "Sede Principal" y como
+// "Lima".
 const GRUPOS = {
-  'Sede Principal': 'lima',
-  Trujillo: 'trujillo',
-  Piura: 'piura',
-  Chiclayo: 'chiclayo',
-  'Equipo Comercial': 'comercial',
+  lima: ['Lima', 'Sede Principal'],
+  trujillo: ['Trujillo'],
+  piura: ['Piura'],
+  chiclayo: ['Chiclayo'],
+  comercial: ['Equipo Comercial', 'Comercial'],
 }
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`
@@ -43,34 +48,52 @@ async function convertirFotos() {
   let totalOrigen = 0
   let totalFinal = 0
 
-  for (const [carpeta, prefijo] of Object.entries(GRUPOS)) {
-    const dir = path.join(ORIGEN_SEDES, carpeta)
+  const enDestino = await readdir(DESTINO_SEDES)
 
-    // Si la carpeta original ya fue procesada y eliminada, se reconstruye el
-    // manifiesto a partir de los .webp existentes (el script es idempotente).
-    if (!existsSync(dir)) {
-      const yaConvertidas = (await readdir(DESTINO_SEDES))
-        .filter((f) => new RegExp(`^${prefijo}-\\d+\\.webp$`).test(f))
-        .sort()
-      manifiesto[prefijo] = await Promise.all(
-        yaConvertidas.map(async (f) => {
-          const m = await sharp(path.join(DESTINO_SEDES, f)).metadata()
-          return { src: `/img/sedes/${f}`, ancho: m.width, alto: m.height }
-        }),
-      )
-      console.log(`  · ${carpeta}: ya convertida (${yaConvertidas.length} fotos)`)
+  for (const [prefijo, alias] of Object.entries(GRUPOS)) {
+    // Las fotos ya convertidas se conservan: las tandas nuevas se suman a la
+    // galería, no la reemplazan.
+    const yaConvertidas = enDestino
+      .filter((f) => new RegExp(`^${prefijo}-\\d+\\.webp$`).test(f))
+      .sort()
+
+    manifiesto[prefijo] = await Promise.all(
+      yaConvertidas.map(async (f) => {
+        const m = await sharp(path.join(DESTINO_SEDES, f)).metadata()
+        return { src: `/img/sedes/${f}`, ancho: m.width, alto: m.height }
+      }),
+    )
+
+    // La numeración continúa desde la última existente, para no pisar nada.
+    let siguiente =
+      yaConvertidas.reduce((max, f) => Math.max(max, +f.match(/-(\d+)\./)[1]), 0) + 1
+
+    const carpeta = alias.find((n) => existsSync(path.join(ORIGEN_SEDES, n)))
+    if (!carpeta) {
+      console.log(`  · ${prefijo}: sin fotos nuevas (${yaConvertidas.length} en galería)`)
       continue
     }
 
+    const dir = path.join(ORIGEN_SEDES, carpeta)
     const archivos = (await readdir(dir))
       .filter((f) => /\.(jpe?g|png|webp)$/i.test(f))
       .sort()
 
-    manifiesto[prefijo] = []
+    // Se descartan las copias exactas: al recopilar fotos de varias fuentes
+    // es habitual que la misma imagen llegue dos veces con distinto nombre.
+    const vistos = new Set()
 
-    for (const [i, archivo] of archivos.entries()) {
+    for (const archivo of archivos) {
       const entrada = path.join(dir, archivo)
-      const nombre = `${prefijo}-${String(i + 1).padStart(2, '0')}.webp`
+      const huella = createHash('sha1').update(await readFile(entrada)).digest('hex')
+      if (vistos.has(huella)) {
+        console.log(`  · ${archivo}: copia exacta de otra foto, se omite`)
+        continue
+      }
+      vistos.add(huella)
+
+      const nombre = `${prefijo}-${String(siguiente).padStart(2, '0')}.webp`
+      siguiente += 1
       const salida = path.join(DESTINO_SEDES, nombre)
 
       const bytesOrigen = (await stat(entrada)).size
@@ -104,17 +127,29 @@ async function convertirFotos() {
   // Los originales se apartan a _originales/, fuera de public/, para que no se
   // publiquen pero tampoco se pierdan: son la única fuente si hay que volver a
   // generar la galería con otro tamaño o encuadre. NUNCA se borran.
-  for (const carpeta of Object.keys(GRUPOS)) {
+  for (const carpeta of Object.values(GRUPOS).flat()) {
     const dir = path.join(ORIGEN_SEDES, carpeta)
     if (!existsSync(dir)) continue
+
     const destino = path.join(ARCHIVO_ORIGINALES, carpeta)
-    await mkdir(path.dirname(destino), { recursive: true })
-    if (existsSync(destino)) {
-      console.log(`  · ${carpeta}: ya archivada en _originales/, se deja como está`)
-      continue
+    await mkdir(destino, { recursive: true })
+
+    // Se archiva archivo por archivo, no la carpeta entera: cuando ya hay una
+    // tanda anterior guardada, mover el directorio fallaría y las fotos nuevas
+    // se quedarían en public/, listas para volver a convertirse por duplicado.
+    const pendientes = await readdir(dir)
+    for (const archivo of pendientes) {
+      let destinoArchivo = path.join(destino, archivo)
+      // Si ya existe una foto con ese nombre de otra tanda, se conserva la
+      // anterior y la nueva entra con sufijo.
+      if (existsSync(destinoArchivo)) {
+        const ext = path.extname(archivo)
+        destinoArchivo = path.join(destino, `${path.basename(archivo, ext)}-2${ext}`)
+      }
+      await rename(path.join(dir, archivo), destinoArchivo)
     }
-    await rename(dir, destino)
-    console.log(`  · ${carpeta}: originales archivados en _originales/`)
+    await rm(dir, { recursive: true, force: true })
+    console.log(`  · ${carpeta}: ${pendientes.length} originales archivados en _originales/`)
   }
 
   if (totalOrigen > 0) {
