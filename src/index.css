@@ -102,31 +102,31 @@
      del logo en vez de dejar el papel en blanco. El orden se mantiene —el
      fondo es el tono más oscuro, las franjas quedan encima y las tarjetas son
      lo más claro— para que la jerarquía siga leyéndose igual. */
-  --bg: #c7d5e6;
-  --bg-elevated: #dae4f1;
+  --bg: #aec0d6;
+  --bg-elevated: #d1ddea;
 
-  --shell: #bacbdf;
-  --shell-line: #93adc8;
-  --core: #d7e2ef;
-  --core-line: #b3c8dc;
+  --shell: #a1b5ce;
+  --shell-line: #7593b4;
+  --core: #c8d5e5;
+  --core-line: #9db6d0;
   --core-sheen: none;
 
-  --text: #0b1c2e;
-  --text-soft: #334e68;
+  --text: #08182a;
+  --text-soft: #2b455e;
   /* Alcanza 4.5:1 (WCAG AA para texto pequeño) incluso sobre --shell, que es
      la superficie más oscura donde aparece. */
-  --muted: #3f5670;
+  --muted: #2e4358;
 
   /* Los fondos de marca se recalculan sobre la nueva base gris azulada; si
      se dejaban los anteriores, quedaban más claros que las tarjetas. */
-  --accent-soft: #edd3b5;
-  --cyan-soft: #bcd7ea;
-  --accent-line: #d7a36e;
-  --cyan-line: #82b1cd;
-  --sobre-oscuro: #cddbeb; /* relieve sobre superficies claras */
-  --wa-suave: #c1e2cf;
-  --wa-linea: #74c49d;
-  --wa-texto: #0d6034;
+  --accent-soft: #e3c5a0;
+  --cyan-soft: #abcbe2;
+  --accent-line: #c8914f;
+  --cyan-line: #6ea3c3;
+  --sobre-oscuro: #bccddf; /* relieve sobre superficies claras */
+  --wa-suave: #aed7c0;
+  --wa-linea: #5fb68c;
+  --wa-texto: #0a5029;
 
   --ambient:
     0 1px 2px rgba(27, 58, 92, 0.05), 0 8px 24px -10px rgba(27, 58, 92, 0.1),
@@ -137,7 +137,9 @@
 
   --mesh-a: rgba(53, 189, 236, 0.13);
   --mesh-b: rgba(247, 145, 30, 0.1);
-  --grid-line: rgba(27, 58, 92, 0.055);
+  /* Sobre la base más oscura la retícula al 5,5 % desaparecía; se sube para
+     que la textura de fondo siga leyéndose igual que antes. */
+  --grid-line: rgba(15, 38, 64, 0.075);
   --fiber-opacity: 0.32;
   --grain-opacity: 0.02;
 }
@@ -148,13 +150,20 @@
   /* Bajan junto con las superficies: sobre la base más oscura los tonos
      anteriores se quedaban por debajo de 4.5:1 en las etiquetas pequeñas
      (eyebrow, chips de sede), que es donde se leen a menor tamaño. */
-  --accent-text: #8a4a07;
-  --cyan-text: #135572;
+  --accent-text: #733c05;
+  --cyan-text: #104b64;
+  /* Variantes para los destacados de titular. El texto grande solo necesita
+     3:1, así que aguantan un tono bastante más vivo que los de arriba y el
+     naranja y el cian siguen leyéndose como los de la marca. */
+  --accent-display: #994f07;
+  --cyan-display: #146382;
 }
 :root,
 :root[data-theme='dark'] {
   --accent-text: var(--accent);
   --cyan-text: var(--cyan);
+  --accent-display: var(--accent);
+  --cyan-display: var(--cyan);
 }
 
 /* --------------------------------------------------- Alias heredados ---- */

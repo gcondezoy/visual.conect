@@ -49,12 +49,12 @@
   max-width: 15ch;
 }
 .hero__hl {
-  color: var(--accent);
+  color: var(--accent-display);
   position: relative;
   white-space: nowrap;
 }
 .hero__hl--cyan {
-  color: var(--cyan);
+  color: var(--cyan-display);
 }
 
 .hero__lead {
