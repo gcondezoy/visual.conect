@@ -157,7 +157,7 @@
   /* La foto va debajo del mensaje, no encima: arriba empujaba los botones
      fuera de la primera pantalla, que es justo donde tienen que estar. */
   .hero__visual {
-    max-width: 340px;
+    max-width: 420px;
     margin-inline: auto;
     margin-top: 2rem;
   }

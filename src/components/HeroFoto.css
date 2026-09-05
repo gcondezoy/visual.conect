@@ -1,27 +1,29 @@
 .herofoto {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  /* Aire alrededor para que las fichas puedan salirse del marco sin que las
-     recorte la columna. */
-  padding: 1.5rem 1.25rem 2.25rem;
+  max-width: 560px;
+  /* Aire abajo y a los lados para que las fichas puedan salirse de la figura
+     sin que las recorte la columna. */
+  padding: 0 0.5rem 2rem;
 }
 
-.herofoto-marco {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--shell-line);
-  background: var(--shell);
-  box-shadow: var(--ambient-lift);
-}
-
-.herofoto-marco img {
+.herofoto-img {
   width: 100%;
   height: auto;
   display: block;
-  /* Leve realce: la foto original viene algo plana de contraste. */
-  filter: saturate(1.05) contrast(1.04);
+  /* Sombra apoyada bajo las figuras: sin ella, un recorte sobre fondo plano
+     parece pegado. Sigue la silueta porque el PNG lleva transparencia. */
+  filter: drop-shadow(0 18px 22px var(--herofoto-sombra));
+}
+
+/* La sombra se ajusta al tema: sobre fondo claro tiene que notarse, sobre
+   fondo oscuro casi desaparece o ensucia la figura. */
+:root,
+:root[data-theme='dark'] {
+  --herofoto-sombra: rgba(0, 0, 0, 0.55);
+}
+:root[data-theme='light'] {
+  --herofoto-sombra: rgba(27, 58, 92, 0.22);
 }
 
 /* ---------------------------------------------------------- Fichas ---- */
@@ -57,23 +59,23 @@
   color: var(--text);
 }
 
-/* Una arriba a la izquierda y otra abajo a la derecha: quiebran el
-   rectángulo por dos esquinas opuestas. */
+/* Una arriba a la izquierda y otra abajo a la derecha, sobre las zonas donde
+   la figura deja hueco. */
 .herofoto-ficha--cuadrillas {
-  top: 0;
+  top: 12%;
   left: 0;
 }
 
 .herofoto-ficha--sedes {
-  bottom: 0;
+  bottom: 0.5rem;
   right: 0;
 }
 
 /* ---------------------------------------------------------- Móvil ---- */
 @media (max-width: 900px) {
   .herofoto {
-    max-width: 380px;
-    padding: 1.25rem 1rem 1.9rem;
+    max-width: 420px;
+    padding-bottom: 1.6rem;
   }
   .herofoto-ficha {
     padding: 0.5rem 0.8rem;

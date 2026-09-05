@@ -98,30 +98,35 @@
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: #eef2f7;
-  --bg-elevated: #ffffff;
+  /* Escala gris azulada, no blanca: el tema claro se apoya en el azul marino
+     del logo en vez de dejar el papel en blanco. El orden se mantiene —el
+     fondo es el tono más oscuro, las franjas quedan encima y las tarjetas son
+     lo más claro— para que la jerarquía siga leyéndose igual. */
+  --bg: #dbe4ef;
+  --bg-elevated: #f1f5fa;
 
-  --shell: #e4eaf2;
-  --shell-line: #c9d6e4;
-  --core: #ffffff;
-  --core-line: #dfe7f0;
+  --shell: #cfdbe9;
+  --shell-line: #a7bcd2;
+  --core: #edf2f8;
+  --core-line: #c8d7e6;
   --core-sheen: none;
 
-  --text: #0d2033;
-  --text-soft: #3d5c78;
-  /* Se oscurece para alcanzar 4.5:1 (WCAG AA para texto pequeño) incluso
-     sobre --shell, que es el fondo más claro donde aparece. Con #64809a
-     quedaba en 3.4:1 en etiquetas de 11-14 px. */
-  --muted: #4f6880;
+  --text: #0b1c2e;
+  --text-soft: #35516c;
+  /* Alcanza 4.5:1 (WCAG AA para texto pequeño) incluso sobre --shell, que es
+     la superficie más oscura donde aparece. */
+  --muted: #47607a;
 
-  --accent-soft: #fbeddc;
-  --cyan-soft: #dfeef7;
-  --accent-line: #edc296;
-  --cyan-line: #a8cfe2;
-  --sobre-oscuro: #f4f7fa; /* relieve sobre superficies claras */
-  --wa-suave: #e3f7ec;
-  --wa-linea: #9adcb8;
-  --wa-texto: #10783f;
+  /* Los fondos de marca se recalculan sobre la nueva base gris azulada; si
+     se dejaban los anteriores, quedaban más claros que las tarjetas. */
+  --accent-soft: #f3e2ce;
+  --cyan-soft: #d3e5f1;
+  --accent-line: #ddb082;
+  --cyan-line: #94bcd4;
+  --sobre-oscuro: #e3ebf4; /* relieve sobre superficies claras */
+  --wa-suave: #d6ecdf;
+  --wa-linea: #86ccaa;
+  --wa-texto: #0e6b39;
 
   --ambient:
     0 1px 2px rgba(27, 58, 92, 0.05), 0 8px 24px -10px rgba(27, 58, 92, 0.1),

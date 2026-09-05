@@ -3,29 +3,26 @@ import { CUADRILLAS_NACIONAL } from '../config.js'
 import './HeroFoto.css'
 
 /**
- * OPCIÓN C del visual del hero: fotografía enmarcada.
+ * Visual del hero: el equipo técnico, recortado sobre el fondo de la página.
  *
- * La imagen mide 735×412, así que da de sobra en esta columna (unos 430 px)
- * pero se vería pixelada estirada como fondo a pantalla completa. Por eso va
- * enmarcada y no de fondo.
- *
- * Dos fichas superpuestas rompen el rectángulo y aportan el dato duro que la
- * foto sola no da.
+ * La foto venía con fondo blanco de estudio. Se recortó rellenando desde los
+ * bordes hacia dentro —no por umbral de color, que habría borrado también los
+ * cascos y el plano, que son blancos— y ahora las figuras se apoyan
+ * directamente sobre la página, sin marco.
  */
 export default function HeroFoto() {
   return (
     <div className="herofoto">
-      <figure className="herofoto-marco">
-        <img
-          src="/img/hero/tecnico-torre.webp"
-          width="735"
-          height="412"
-          alt="Técnico de Visual Connections trabajando en una antena de telecomunicaciones"
-          fetchPriority="high"
-        />
-      </figure>
+      <img
+        className="herofoto-img"
+        src="/img/hero/equipo-tecnico.webp"
+        width="897"
+        height="657"
+        alt="Tres técnicos de Visual Connections revisando un plano de red de fibra óptica"
+        fetchPriority="high"
+      />
 
-      {/* Fichas al vuelo: dan profundidad y cifran lo que la foto sugiere. */}
+      {/* Fichas al vuelo: cifran lo que la foto sugiere. */}
       <div className="herofoto-ficha herofoto-ficha--cuadrillas">
         <Broadcast weight="fill" size={18} />
         <span>

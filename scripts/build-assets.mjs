@@ -38,6 +38,16 @@ const GRUPOS = {
   comercial: ['Equipo Comercial', 'Comercial'],
 }
 
+// Foto que encabeza cada sede. Son las grupales: presentan al equipo completo
+// y funcionan mejor como primera imagen que un plano suelto. Al añadir tandas
+// nuevas el orden se mantiene, porque esto se aplica al final.
+const PRIMERA = {
+  lima: 'lima-02.webp',
+  trujillo: 'trujillo-11.webp',
+  piura: 'piura-09.webp',
+  chiclayo: 'chiclayo-08.webp',
+}
+
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`
 
 // ---------------------------------------------------------------- fotos ----
@@ -150,6 +160,18 @@ async function convertirFotos() {
     }
     await rm(dir, { recursive: true, force: true })
     console.log(`  · ${carpeta}: ${pendientes.length} originales archivados en _originales/`)
+  }
+
+  // La foto destacada se lleva al frente de su sede.
+  for (const [prefijo, archivo] of Object.entries(PRIMERA)) {
+    const lista = manifiesto[prefijo]
+    if (!lista) continue
+    const i = lista.findIndex((f) => f.src.endsWith(`/${archivo}`))
+    if (i < 0) {
+      console.log(`  ! ${prefijo}: no se encontró ${archivo} para encabezar`)
+      continue
+    }
+    if (i > 0) lista.unshift(lista.splice(i, 1)[0])
   }
 
   if (totalOrigen > 0) {

@@ -2,12 +2,12 @@
 export const GALERIA = {
   "lima": [
     {
-      "src": "/img/sedes/lima-01.webp",
+      "src": "/img/sedes/lima-02.webp",
       "ancho": 1400,
       "alto": 936
     },
     {
-      "src": "/img/sedes/lima-02.webp",
+      "src": "/img/sedes/lima-01.webp",
       "ancho": 1400,
       "alto": 936
     },
@@ -44,6 +44,11 @@ export const GALERIA = {
   ],
   "trujillo": [
     {
+      "src": "/img/sedes/trujillo-11.webp",
+      "ancho": 1280,
+      "alto": 960
+    },
+    {
       "src": "/img/sedes/trujillo-04.webp",
       "ancho": 1000,
       "alto": 750
@@ -77,46 +82,46 @@ export const GALERIA = {
       "src": "/img/sedes/trujillo-10.webp",
       "ancho": 1000,
       "alto": 750
-    },
-    {
-      "src": "/img/sedes/trujillo-11.webp",
-      "ancho": 1280,
-      "alto": 960
     }
   ],
   "piura": [
     {
-      "src": "/img/sedes/piura-04.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/piura-05.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/piura-06.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/piura-07.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
-      "src": "/img/sedes/piura-08.webp",
-      "ancho": 1000,
-      "alto": 750
-    },
-    {
       "src": "/img/sedes/piura-09.webp",
       "ancho": 1080,
       "alto": 792
+    },
+    {
+      "src": "/img/sedes/piura-10.webp",
+      "ancho": 1084,
+      "alto": 1365
+    },
+    {
+      "src": "/img/sedes/piura-11.webp",
+      "ancho": 1050,
+      "alto": 1400
+    },
+    {
+      "src": "/img/sedes/piura-12.webp",
+      "ancho": 1050,
+      "alto": 1400
+    },
+    {
+      "src": "/img/sedes/piura-13.webp",
+      "ancho": 1050,
+      "alto": 1400
+    },
+    {
+      "src": "/img/sedes/piura-14.webp",
+      "ancho": 1050,
+      "alto": 1400
     }
   ],
   "chiclayo": [
+    {
+      "src": "/img/sedes/chiclayo-08.webp",
+      "ancho": 1280,
+      "alto": 960
+    },
     {
       "src": "/img/sedes/chiclayo-01.webp",
       "ancho": 788,
@@ -151,11 +156,6 @@ export const GALERIA = {
       "src": "/img/sedes/chiclayo-07.webp",
       "ancho": 1400,
       "alto": 788
-    },
-    {
-      "src": "/img/sedes/chiclayo-08.webp",
-      "ancho": 1280,
-      "alto": 960
     }
   ],
   "comercial": [
