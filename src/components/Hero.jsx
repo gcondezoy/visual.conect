@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowDown, WhatsappLogo, Broadcast } from '@phosphor-icons/react'
-import { NEGOCIO, aniosDeExperiencia } from '../config.js'
+import { NEGOCIO } from '../config.js'
+import HeroFoto from './HeroFoto.jsx'
 import './Hero.css'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -8,13 +9,6 @@ const ease = [0.22, 1, 0.36, 1]
 export default function Hero() {
   return (
     <section id="inicio" className="hero">
-      {/* Fondo animado: grilla + resplandores + ondas */}
-      <div className="hero__bg" aria-hidden="true">
-        <div className="hero__grid" />
-        <div className="hero__glow hero__glow--orange" />
-        <div className="hero__glow hero__glow--cyan" />
-      </div>
-
       <div className="hero__inner container">
         <div className="hero__content">
           <motion.span
@@ -63,25 +57,10 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <motion.div
-            className="hero__stats"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease }}
-          >
-            <div className="hero__stat">
-              <strong className="mono">+50</strong>
-              <span>cuadrillas técnicas</span>
-            </div>
-            <div className="hero__stat">
-              <strong className="mono">4</strong>
-              <span>sedes a nivel nacional</span>
-            </div>
-            <div className="hero__stat">
-              <strong className="mono">+{aniosDeExperiencia()}</strong>
-              <span>años de experiencia</span>
-            </div>
-          </motion.div>
+          {/* Las cifras salían aquí, en las fichas de la foto y otra vez en la
+              franja de métricas de abajo: tres veces los mismos números en una
+              pantalla. Se quedan en la foto, que es donde aportan, y en la
+              franja, que es su sitio. */}
 
           <motion.div
             className="hero__partners"
@@ -95,6 +74,15 @@ export default function Hero() {
             <span className="hero__partner hero__partner--entel">entel</span>
           </motion.div>
         </div>
+
+        <motion.div
+          className="hero__visual"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.3, ease }}
+        >
+          <HeroFoto />
+        </motion.div>
       </div>
 
       <a href="#nosotros" className="hero__scroll" aria-label="Ir a la siguiente sección">

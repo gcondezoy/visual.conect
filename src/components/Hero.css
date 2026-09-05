@@ -7,34 +7,24 @@
   overflow: hidden;
 }
 
-/* ---------- Fondo animado ---------- */
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* La retícula de cuadros se retira: el cliente pidió el fondo de un color
-   entero, sin cuadritos. */
-.hero__grid {
-  display: none;
-}
-
-/* Los dos orbes difusos de color se retiran: eran manchas translúcidas y el
-   cliente pidió color plano. El interés visual del hero queda en la retícula
-   y en la malla de fibra del fondo. */
-.hero__glow {
-  display: none;
-}
-
 /* ---------- Layout ---------- */
-/* Una sola columna: el titular manda y nada le compite al lado. */
+/* Dos columnas: el titular a la izquierda y el visual ocupando el hueco que
+   antes quedaba vacío a la derecha. */
 .hero__inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
   width: 100%;
   padding-block: 4rem;
+}
+
+.hero__visual {
+  display: grid;
+  place-items: center;
+  width: 100%;
 }
 
 .hero__eyebrow {
@@ -109,34 +99,6 @@
   color: var(--muted);
 }
 
-.hero__stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-bottom: 2.4rem;
-}
-.hero__stat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  padding: 0.9rem 1.5rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--shell-line);
-  border-radius: var(--r-md);
-  box-shadow: var(--ambient);
-}
-.hero__stat strong {
-  font-size: 1.7rem;
-  color: var(--accent);
-  line-height: 1;
-}
-.hero__stat span {
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 0.35rem;
-}
-
 /* ---------- Indicadores flotantes ---------- */
 .hero__scroll {
   position: absolute;
@@ -189,13 +151,28 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .hero__inner {
+    grid-template-columns: 1fr;
     padding-block: 2.5rem 5rem;
+  }
+  /* La foto va debajo del mensaje, no encima: arriba empujaba los botones
+     fuera de la primera pantalla, que es justo donde tienen que estar. */
+  .hero__visual {
+    max-width: 340px;
+    margin-inline: auto;
+    margin-top: 2rem;
   }
   .hero__title,
   .hero__lead {
     max-width: none;
   }
   .hero__wa-hint {
+    display: none;
+  }
+}
+
+/* En pantallas muy bajas el visual sobra: primero el mensaje. */
+@media (max-height: 620px) and (max-width: 900px) {
+  .hero__visual {
     display: none;
   }
 }
@@ -211,17 +188,5 @@
   .hero__eyebrow svg {
     flex: none;
     margin-top: 0.05rem;
-  }
-  .hero__stats {
-    width: 100%;
-  }
-  .hero__stat {
-    flex: 1 1 100%;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0.6rem;
-  }
-  .hero__stat span {
-    margin-top: 0;
   }
 }
