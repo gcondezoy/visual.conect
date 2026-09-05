@@ -39,7 +39,14 @@ export default function Socios() {
               <ul className="marcas__lista">
                 {g.marcas.map((m) => (
                   <li key={m.nombre} className="marca" style={{ '--marca': m.color }}>
-                    <span className="marca__logo">{m.logotipo}</span>
+                    <img
+                      className="marca__logo"
+                      src={m.logo}
+                      alt={m.nombre}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ '--escala': m.escala }}
+                    />
                   </li>
                 ))}
               </ul>

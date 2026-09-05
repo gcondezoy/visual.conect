@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowDown, WhatsappLogo, Broadcast } from '@phosphor-icons/react'
 import { NEGOCIO } from '../config.js'
+import { SOCIOS } from '../data.js'
 import HeroFoto from './HeroFoto.jsx'
 import './Hero.css'
 
@@ -69,9 +70,15 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.44 }}
           >
             <span className="hero__partners-label">Trabajamos con</span>
-            <span className="hero__partner hero__partner--win">win</span>
-            <span className="hero__partners-dot">·</span>
-            <span className="hero__partner hero__partner--entel">entel</span>
+            {SOCIOS.map((s) => (
+              <img
+                key={s.nombre}
+                className="hero__partner"
+                src={s.logo}
+                alt={s.nombre}
+                style={{ '--escala': s.escala }}
+              />
+            ))}
           </motion.div>
         </div>
 

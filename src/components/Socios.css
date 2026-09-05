@@ -75,14 +75,19 @@
   box-shadow: var(--ambient-lift);
 }
 
+/* Caja común para los cuatro logotipos, con la corrección óptica de cada uno
+   aplicada sobre ella. `contain` respeta la proporción de cada marca. */
 .marca__logo {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--marca);
-  text-align: center;
+  width: calc(100% * var(--escala, 1));
+  max-width: calc(190px * var(--escala, 1));
+  height: calc(clamp(46px, 7vw, 62px) * var(--escala, 1));
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.6s var(--ease-fluid);
+}
+
+.marca:hover .marca__logo {
+  transform: scale(1.05);
 }
 
 /* --------------------------------------------------------- Móvil ---- */

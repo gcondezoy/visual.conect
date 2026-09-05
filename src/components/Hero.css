@@ -83,20 +83,14 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+/* Los logotipos reales, con la misma correccion optica que en la seccion de
+   socios: encajados en una caja comun, los compactos se ven mas pequenos que
+   los alargados aunque midan lo mismo. */
 .hero__partner {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 1.35rem;
-  letter-spacing: -0.02em;
-}
-.hero__partner--win {
-  color: #ff6b00;
-}
-.hero__partner--entel {
-  color: #33b3ea;
-}
-.hero__partners-dot {
-  color: var(--muted);
+  height: calc(30px * var(--escala, 1));
+  width: auto;
+  max-width: calc(120px * var(--escala, 1));
+  object-fit: contain;
 }
 
 /* ---------- Indicadores flotantes ---------- */
