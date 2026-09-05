@@ -37,12 +37,12 @@
   border-radius: var(--r-md);
 }
 .mv-card__icon--orange {
-  color: var(--accent);
-  background: var(--accent-soft);
+  color: var(--tile-fg);
+  background: var(--tile-bg);
 }
 .mv-card__icon--cyan {
-  color: var(--cyan);
-  background: var(--cyan-soft);
+  color: var(--tile-cyan-fg);
+  background: var(--tile-cyan-bg);
 }
 
 .mv-card h3 {
@@ -89,7 +89,7 @@
     color 0.2s ease;
 }
 .valor svg {
-  color: var(--accent);
+  color: var(--accent-text);
   flex-shrink: 0;
 }
 .valor:hover {

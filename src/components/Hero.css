@@ -35,11 +35,11 @@
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--chip-accent-fg);
   padding: 0.5rem 1rem;
-  border: 1px solid var(--accent-line);
+  border: 1px solid var(--chip-accent-line);
   border-radius: var(--r-pill);
-  background: var(--accent-soft);
+  background: var(--chip-accent-bg);
   margin-bottom: 1.5rem;
 }
 
@@ -49,12 +49,18 @@
   max-width: 15ch;
 }
 .hero__hl {
-  color: var(--accent-display);
+  color: var(--hl-accent-fg);
   position: relative;
   white-space: nowrap;
+  text-decoration-line: underline;
+  text-decoration-color: var(--hl-accent-line);
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.13em;
+  text-decoration-skip-ink: none;
 }
 .hero__hl--cyan {
-  color: var(--cyan-display);
+  color: var(--hl-cyan-fg);
+  text-decoration-color: var(--hl-cyan-line);
 }
 
 .hero__lead {

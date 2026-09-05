@@ -73,14 +73,14 @@
   text-transform: uppercase;
   padding: 0.32rem 0.7rem;
   border-radius: var(--r-pill);
-  background: var(--cyan-soft);
-  color: var(--cyan-text);
+  background: var(--chip-cyan-bg);
+  color: var(--chip-cyan-fg);
   margin-bottom: 0.9rem;
 }
 
 .sede-chip[data-principal='true'] {
-  background: var(--accent-soft);
-  color: var(--accent-text);
+  background: var(--chip-accent-bg);
+  color: var(--chip-accent-fg);
 }
 
 .sede-ciudad {

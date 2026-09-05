@@ -119,7 +119,10 @@
 
   /* Los fondos de marca se recalculan sobre la nueva base gris azulada; si
      se dejaban los anteriores, quedaban más claros que las tarjetas. */
-  --accent-soft: #e3c5a0;
+  /* Ya solo queda en superficies de aviso (libro de reclamaciones, estado
+     activo del interruptor de tema). Se aclara respecto al tinte anterior:
+     al bajar con el resto de la escala se volvía un tostado sucio. */
+  --accent-soft: #e9d2b6;
   --cyan-soft: #abcbe2;
   --accent-line: #c8914f;
   --cyan-line: #6ea3c3;
@@ -152,18 +155,60 @@
      (eyebrow, chips de sede), que es donde se leen a menor tamaño. */
   --accent-text: #733c05;
   --cyan-text: #104b64;
-  /* Variantes para los destacados de titular. El texto grande solo necesita
-     3:1, así que aguantan un tono bastante más vivo que los de arriba y el
-     naranja y el cian siguen leyéndose como los de la marca. */
-  --accent-display: #994f07;
-  --cyan-display: #146382;
 }
 :root,
 :root[data-theme='dark'] {
   --accent-text: var(--accent);
   --cyan-text: var(--cyan);
-  --accent-display: var(--accent);
-  --cyan-display: var(--cyan);
+}
+
+/* ------------------------------------------- Marca en color entero ---- */
+/* El naranja de marca es de medio tono: sobre el fondo azulado claro no
+   llega ni a 2:1, así que como *texto* hay que apagarlo hasta un ocre que
+   ya no se reconoce como el color de la empresa.
+   Como *relleno* no tiene ese problema. El naranja íntegro con texto marino
+   encima da 7,7:1, muy por encima del mínimo, y el color queda intacto. Por
+   eso las pastillas y los tiles pasan a fondo entero en vez de tinte pálido
+   —que además es lo que pidió el cliente— y los destacados de titular pasan
+   a texto marino con el subrayado en el color de marca.
+   El tema oscuro no necesita nada de esto: ahí el naranja luce sobre el
+   fondo y se queda como estaba. */
+:root,
+:root[data-theme='dark'] {
+  --chip-accent-bg: var(--accent-soft);
+  --chip-accent-fg: var(--accent);
+  --chip-accent-line: var(--accent-line);
+  --chip-cyan-bg: var(--cyan-soft);
+  --chip-cyan-fg: var(--cyan);
+  --chip-cyan-line: var(--cyan-line);
+
+  --tile-bg: var(--accent-soft);
+  --tile-fg: var(--accent);
+  --tile-cyan-bg: var(--cyan-soft);
+  --tile-cyan-fg: var(--cyan);
+
+  --hl-accent-fg: var(--accent);
+  --hl-cyan-fg: var(--cyan);
+  --hl-accent-line: transparent;
+  --hl-cyan-line: transparent;
+}
+:root[data-theme='light'] {
+  --chip-accent-bg: var(--accent);
+  --chip-accent-fg: #1f1103;
+  --chip-accent-line: #c4700f;
+  --chip-cyan-bg: var(--cyan);
+  --chip-cyan-fg: #052030;
+  --chip-cyan-line: #1b93c0;
+
+  --tile-bg: #12304d;
+  --tile-fg: var(--accent);
+  --tile-cyan-bg: #12304d;
+  --tile-cyan-fg: var(--cyan);
+
+  --hl-accent-fg: var(--text);
+  --hl-cyan-fg: var(--text);
+  --hl-accent-line: var(--accent);
+  --hl-cyan-line: var(--cyan);
 }
 
 /* --------------------------------------------------- Alias heredados ---- */
@@ -303,11 +348,11 @@ p {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--chip-accent-fg);
   padding: 0.38rem 0.85rem;
-  border: 1px solid var(--accent-line);
+  border: 1px solid var(--chip-accent-line);
   border-radius: var(--r-pill);
-  background: var(--accent-soft);
+  background: var(--chip-accent-bg);
   margin-bottom: 1.35rem;
 }
 
@@ -321,11 +366,23 @@ p {
   max-width: 58ch;
 }
 
+/* Destacado dentro de un titular. En oscuro es el color de marca a secas; en
+   claro el color se va al subrayado y el texto se queda en marino, que es lo
+   único que mantiene el naranja vivo sin sacrificar la lectura. */
+.text-accent,
+.text-cyan {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.085em;
+  text-underline-offset: 0.14em;
+  text-decoration-skip-ink: none;
+}
 .text-accent {
-  color: var(--accent-text);
+  color: var(--hl-accent-fg);
+  text-decoration-color: var(--hl-accent-line);
 }
 .text-cyan {
-  color: var(--cyan-text);
+  color: var(--hl-cyan-fg);
+  text-decoration-color: var(--hl-cyan-line);
 }
 .mono {
   font-family: var(--font-body);

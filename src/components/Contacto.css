@@ -33,7 +33,7 @@
   border-color: var(--border-strong);
 }
 .cinfo svg {
-  color: var(--accent);
+  color: var(--accent-text);
   flex-shrink: 0;
 }
 .cinfo--wa svg {
@@ -70,7 +70,7 @@
 }
 .contacto__horarios h3 svg,
 .contacto__sedes h3 svg {
-  color: var(--cyan);
+  color: var(--cyan-text);
 }
 
 .contacto__horarios ul {

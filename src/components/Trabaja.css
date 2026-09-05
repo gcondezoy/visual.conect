@@ -31,7 +31,9 @@
   border-radius: var(--r-md);
 }
 .trabaja__meta-item svg {
-  color: var(--accent);
+  /* Iconos pequeños: el naranja de marca a este tamaño se pierde sobre el
+     tema claro, el token de texto es el mismo color ya adaptado. */
+  color: var(--accent-text);
   flex-shrink: 0;
 }
 .trabaja__meta-item span {
@@ -79,7 +81,7 @@
 }
 .trabaja__salarios strong {
   font-size: 1.1rem;
-  color: var(--accent);
+  color: var(--accent-text);
   white-space: nowrap;
 }
 
@@ -104,7 +106,7 @@
   color: var(--text-soft);
 }
 .trabaja__reqs svg {
-  color: var(--cyan);
+  color: var(--cyan-text);
   flex-shrink: 0;
 }
 

@@ -36,8 +36,8 @@
   width: 60px;
   height: 60px;
   border-radius: var(--r-md);
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--tile-bg);
+  color: var(--tile-fg);
   transition:
     transform 0.35s ease,
     background 0.28s ease,
