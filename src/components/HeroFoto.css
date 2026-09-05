@@ -2,9 +2,10 @@
   position: relative;
   width: 100%;
   max-width: 560px;
-  /* Aire abajo y a los lados para que las fichas puedan salirse de la figura
-     sin que las recorte la columna. */
-  padding: 0 0.5rem 2rem;
+  /* Reserva para las fichas. La figura ocupa su recuadro casi por completo
+     —solo queda algo de aire entre las cabezas— así que las fichas se apoyan
+     fuera de ella, en este margen, y no tapan a nadie. */
+  padding: 0 0 3.5rem;
 }
 
 .herofoto-img {
@@ -59,29 +60,38 @@
   color: var(--text);
 }
 
-/* Una arriba a la izquierda y otra abajo a la derecha, sobre las zonas donde
-   la figura deja hueco. */
+/* En diagonal y por fuera de la figura: una asomando por el borde izquierdo
+   a la altura de las cabezas —la única banda con aire— y la otra apoyada
+   bajo los equipos, en el margen inferior. */
 .herofoto-ficha--cuadrillas {
-  top: 12%;
+  top: 2%;
   left: 0;
+  transform: translateX(-16%);
 }
 
 .herofoto-ficha--sedes {
-  bottom: 0.5rem;
+  bottom: 0;
   right: 0;
+  transform: translateX(10%);
 }
 
 /* ---------------------------------------------------------- Móvil ---- */
 @media (max-width: 900px) {
   .herofoto {
     max-width: 420px;
-    padding-bottom: 1.6rem;
+    padding-bottom: 2.6rem;
   }
   .herofoto-ficha {
     padding: 0.5rem 0.8rem;
   }
   .herofoto-ficha strong {
     font-size: 0.95rem;
+  }
+  /* Aquí la columna no tiene margen a los lados: si las fichas se salieran
+     hacia afuera, el borde de la pantalla las cortaría. */
+  .herofoto-ficha--cuadrillas,
+  .herofoto-ficha--sedes {
+    transform: none;
   }
 }
 
