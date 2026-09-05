@@ -26,7 +26,9 @@
   color: var(--text-soft);
 }
 .field label .req {
-  color: var(--accent);
+  /* El naranja de marca a 14 px sobre el tema claro se queda en 1,8:1. El
+     token de texto es el mismo color adaptado a cada tema. */
+  color: var(--accent-text);
 }
 
 .field input,

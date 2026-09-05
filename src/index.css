@@ -102,31 +102,31 @@
      del logo en vez de dejar el papel en blanco. El orden se mantiene —el
      fondo es el tono más oscuro, las franjas quedan encima y las tarjetas son
      lo más claro— para que la jerarquía siga leyéndose igual. */
-  --bg: #dbe4ef;
-  --bg-elevated: #f1f5fa;
+  --bg: #c7d5e6;
+  --bg-elevated: #dae4f1;
 
-  --shell: #cfdbe9;
-  --shell-line: #a7bcd2;
-  --core: #edf2f8;
-  --core-line: #c8d7e6;
+  --shell: #bacbdf;
+  --shell-line: #93adc8;
+  --core: #d7e2ef;
+  --core-line: #b3c8dc;
   --core-sheen: none;
 
   --text: #0b1c2e;
-  --text-soft: #35516c;
+  --text-soft: #334e68;
   /* Alcanza 4.5:1 (WCAG AA para texto pequeño) incluso sobre --shell, que es
      la superficie más oscura donde aparece. */
-  --muted: #47607a;
+  --muted: #3f5670;
 
   /* Los fondos de marca se recalculan sobre la nueva base gris azulada; si
      se dejaban los anteriores, quedaban más claros que las tarjetas. */
-  --accent-soft: #f3e2ce;
-  --cyan-soft: #d3e5f1;
-  --accent-line: #ddb082;
-  --cyan-line: #94bcd4;
-  --sobre-oscuro: #e3ebf4; /* relieve sobre superficies claras */
-  --wa-suave: #d6ecdf;
-  --wa-linea: #86ccaa;
-  --wa-texto: #0e6b39;
+  --accent-soft: #edd3b5;
+  --cyan-soft: #bcd7ea;
+  --accent-line: #d7a36e;
+  --cyan-line: #82b1cd;
+  --sobre-oscuro: #cddbeb; /* relieve sobre superficies claras */
+  --wa-suave: #c1e2cf;
+  --wa-linea: #74c49d;
+  --wa-texto: #0d6034;
 
   --ambient:
     0 1px 2px rgba(27, 58, 92, 0.05), 0 8px 24px -10px rgba(27, 58, 92, 0.1),
@@ -145,8 +145,11 @@
 /* En tema claro el naranja puro no alcanza contraste AA sobre blanco:
    se oscurece solo para texto, no para fondos ni trazos. */
 :root[data-theme='light'] {
-  --accent-text: #b8630a;
-  --cyan-text: #1c6f93;
+  /* Bajan junto con las superficies: sobre la base más oscura los tonos
+     anteriores se quedaban por debajo de 4.5:1 en las etiquetas pequeñas
+     (eyebrow, chips de sede), que es donde se leen a menor tamaño. */
+  --accent-text: #8a4a07;
+  --cyan-text: #135572;
 }
 :root,
 :root[data-theme='dark'] {
