@@ -60,19 +60,17 @@
   color: var(--text);
 }
 
-/* En diagonal y por fuera de la figura: una asomando por el borde izquierdo
-   a la altura de las cabezas —la única banda con aire— y la otra apoyada
-   bajo los equipos, en el margen inferior. */
+/* Las dos al pie, una a cada lado. Arriba no pueden ir: esa banda es la de
+   los cascos y las caras, y taparlas arruina la foto. Abajo se apoyan sobre
+   el margen reservado, por debajo de la figura. */
 .herofoto-ficha--cuadrillas {
-  top: 2%;
+  bottom: 0;
   left: 0;
-  transform: translateX(-16%);
 }
 
 .herofoto-ficha--sedes {
   bottom: 0;
   right: 0;
-  transform: translateX(10%);
 }
 
 /* ---------------------------------------------------------- Móvil ---- */
