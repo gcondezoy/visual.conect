@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://visual-conect-seven.vercel.app/sitemap.xml
+Sitemap: https://vconnections.pe/sitemap.xml
