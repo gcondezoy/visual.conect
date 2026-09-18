@@ -1,6 +1,24 @@
+.nosotros__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 3rem;
+}
+
 .nosotros__head {
   max-width: 62ch;
-  margin-bottom: 3rem;
+}
+
+.nosotros__antena {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .nosotros__intro {
+    grid-template-columns: 1fr;
+  }
 }
 
 .nosotros__grid {
@@ -109,4 +127,10 @@
   .valores__list {
     grid-template-columns: 1fr;
   }
+}
+
+/* Los anillos de señal de la antena salen del marco a propósito; aquí se
+   recortan en horizontal para que nunca generen scroll lateral. */
+.nosotros {
+  overflow-x: clip;
 }

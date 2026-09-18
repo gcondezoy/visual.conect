@@ -1,0 +1,132 @@
+.antena {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Resplandor detrás de la antena: la señal se lee sobre una zona de luz
+   propia y no sobre el fondo plano de la sección. */
+.antena__halo {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 92%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--cyan) 24%, transparent),
+    color-mix(in srgb, var(--accent) 7%, transparent) 60%,
+    transparent 100%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.antena__escena {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 1;
+}
+
+/* La imagen es vectorial: se escala sin perder nitidez. Sin giros ni
+   perspectiva encima, que obligan al navegador a rasterizarla y la
+   ablandan. */
+.antena__img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 22px 36px rgba(4, 20, 48, 0.3));
+  user-select: none;
+}
+
+/* ---------------------------------------------------------- Anillos ---- */
+/* Capa de tamaño cero anclada en el emisor. Cuatro anillos en cadena, cada
+   uno desfasado un cuarto del ciclo: siempre hay uno saliendo, así que la
+   emisión no se corta nunca. */
+.antena__pulsos {
+  position: absolute;
+  z-index: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.antena__pulso {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 820px;
+  height: 820px;
+  margin: -410px 0 0 -410px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.06);
+  animation: antena-emite 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: calc(var(--i) * 0.9s);
+  will-change: transform, opacity;
+}
+
+/* Uno de cada cuatro sale en el naranja de la bocina: da ritmo a la cadena
+   sin romper la lectura de "señal". */
+.antena__pulso:nth-child(4n + 1) {
+  border-color: var(--accent);
+}
+
+@keyframes antena-emite {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.06);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* ------------------------------------------------------------ Ondas ---- */
+/* Las tres ondas del logo se encienden de dentro hacia afuera, encima de
+   las dibujadas: la señal se ve salir de la bocina. */
+.antena__ondas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: #8fe0ff;
+  pointer-events: none;
+}
+
+.antena__ondas path {
+  opacity: 0;
+  animation: antena-onda 1.8s ease-out infinite;
+  animation-delay: calc(var(--i) * 0.22s);
+}
+
+@keyframes antena-onda {
+  0%,
+  60%,
+  100% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 900px) {
+  .antena__escena {
+    width: min(78vw, 360px);
+  }
+
+  .antena__pulso {
+    width: 560px;
+    height: 560px;
+    margin: -280px 0 0 -280px;
+  }
+}

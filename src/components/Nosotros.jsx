@@ -1,6 +1,7 @@
 import { Target, Eye } from '@phosphor-icons/react'
 import { icono } from '../iconos.js'
 import Reveal from './Reveal.jsx'
+import AntenaVC from './AntenaVC.jsx'
 import { EMPRESA_DESCRIPCION, MISION, VISION, VALORES } from '../data.js'
 import './Nosotros.css'
 
@@ -8,13 +9,22 @@ export default function Nosotros() {
   return (
     <section id="nosotros" className="section nosotros">
       <div className="container">
-        <Reveal className="nosotros__head">
-          <span className="section-eyebrow">Quiénes somos</span>
-          <h2 className="section-title">
-            Experiencia y garantía en <span className="text-accent">telecomunicaciones</span>
-          </h2>
-          <p className="section-lead">{EMPRESA_DESCRIPCION}</p>
-        </Reveal>
+        {/* Texto a la izquierda y la antena de la marca a la derecha. Antes
+            el encabezado ocupaba media pantalla y dejaba la otra mitad
+            vacía. */}
+        <div className="nosotros__intro">
+          <Reveal className="nosotros__head">
+            <span className="section-eyebrow">Quiénes somos</span>
+            <h2 className="section-title">
+              Experiencia y garantía en <span className="text-accent">telecomunicaciones</span>
+            </h2>
+            <p className="section-lead">{EMPRESA_DESCRIPCION}</p>
+          </Reveal>
+
+          <Reveal className="nosotros__antena" direction="left" delay={0.1}>
+            <AntenaVC />
+          </Reveal>
+        </div>
 
         <div className="nosotros__grid">
           <Reveal className="mv-card" direction="up" delay={0.05}>
