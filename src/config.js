@@ -17,7 +17,7 @@ export const NEGOCIO = {
   // de WIN, no de Visual Connections. Los canales son correo y WhatsApp.
   whatsapp: '51922694968',
   whatsappVisible: '922 694 968', // cómo se muestra en pantalla
-  email: 'contacto@visualconnections.pe',
+  email: 'recursoshumanos@vconnections.pe',
 
   // --- Página hermana: KMT (área de ventas) ---
   // Reemplazar "#" por la URL real cuando esté lista.
@@ -101,7 +101,7 @@ export const RECLAMACIONES = {
   ruc: '20547356340',
   // Donde llega el reclamo. Conviene que sea una casilla distinta de la
   // comercial, para que ningún reclamo se pierda entre consultas.
-  email: 'contacto@visualconnections.pe',
+  email: 'recursoshumanos@vconnections.pe',
   plazoDias: 15,
 }
 
