@@ -8,18 +8,13 @@ export const GALERIA = {
     },
     {
       "src": "/img/sedes/lima-01.webp",
-      "ancho": 1400,
+      "ancho": 1310,
       "alto": 936
     },
     {
       "src": "/img/sedes/lima-03.webp",
       "ancho": 1281,
       "alto": 1080
-    },
-    {
-      "src": "/img/sedes/lima-04.webp",
-      "ancho": 1400,
-      "alto": 936
     },
     {
       "src": "/img/sedes/lima-05.webp",
@@ -50,38 +45,38 @@ export const GALERIA = {
     },
     {
       "src": "/img/sedes/trujillo-04.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 897,
+      "alto": 686
     },
     {
       "src": "/img/sedes/trujillo-05.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 849,
+      "alto": 697
     },
     {
       "src": "/img/sedes/trujillo-06.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 853,
+      "alto": 703
     },
     {
       "src": "/img/sedes/trujillo-07.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 834,
+      "alto": 677
     },
     {
       "src": "/img/sedes/trujillo-08.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 862,
+      "alto": 703
     },
     {
       "src": "/img/sedes/trujillo-09.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 871,
+      "alto": 701
     },
     {
       "src": "/img/sedes/trujillo-10.webp",
-      "ancho": 1000,
-      "alto": 750
+      "ancho": 866,
+      "alto": 711
     }
   ],
   "piura": [
